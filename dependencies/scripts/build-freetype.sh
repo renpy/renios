@@ -24,10 +24,10 @@ try ./configure --prefix=$DESTROOT \
   --enable-static=yes \
   --enable-shared=no \
   CC="$ARM_CC" AR="$ARM_AR" \
-  LDFLAGS="$ARM_LDFLAGS" CFLAGS="$ARM_CFLAGS" 2>&1 >/dev/null
+  LDFLAGS="$ARM_LDFLAGS" CFLAGS="$ARM_CFLAGS" # 2>&1 >/dev/null
 echo "Building freetype"
 try make clean 2>&1 >/dev/null
-try make 2>&1 >/dev/null
+try make CCraw_build=/usr/bin/clang # 2>&1 >/dev/null
 try make install 2>&1 >/dev/null
 
 # copy to buildroot
