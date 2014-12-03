@@ -83,6 +83,26 @@ echo "BUILDING FOR ARM64 (RELEASE)"
 . $(dirname $0)/environment-release.sh
 try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
+
+run_lipo () {
+
+    try lipo -create -output $RENIOSDEPROOT/build/debug/lib/$1 \
+        -arch x86_64 $RENIOSDEPROOT/build/iphonesimulator-x86_64/debug/lib/$1 \
+        -arch armv7s $RENIOSDEPROOT/build/iphoneos-armv7s/debug/lib/$1
+
+        #-arch armv7 $RENIOSDEPROOT/build/iphoneos-armv7/debug/lib/$1 \
+        #-arch arm64 $RENIOSDEPROOT/build/iphoneos-arm64/debug/lib/$1 \
+        #-arch i386 $RENIOSDEPROOT/build/iphonesimulator-i386/debug/lib/$1 \
+
+    try lipo -create -output $RENIOSDEPROOT/build/release/lib/$1 \
+        -arch armv7 $RENIOSDEPROOT/build/iphoneos-armv7/release/lib/$1 \
+        -arch armv7s $RENIOSDEPROOT/build/iphoneos-armv7s/release/lib/$1 \
+        -arch arm64 $RENIOSDEPROOT/build/iphoneos-arm64/release/lib/$1
+
+        # -arch i386 $RENIOSDEPROOT/build/iphonesimulator-i386/release/lib/$1 \
+        # -arch x86_64 $RENIOSDEPROOT/build/iphonesimulator-x86_64/release/lib/$1 \
+}
+
 if [ "$RENIOSCOMPONENT" == "all" ]; then
 
   echo "PRODUCING FAT BINARIES"
