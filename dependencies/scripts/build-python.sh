@@ -30,9 +30,11 @@ try patch -p1 < $RENIOSDEPROOT/patches/python/Python-$PYTHON_VERSION-dynload.pat
 try cp $RENIOSDEPROOT/src/python/ModulesSetup Modules/Setup.local
 try cp $RENIOSDEPROOT/src/python/_scproxy.py Lib/_scproxy.py
 
+CCACHE=ccache
+
 echo 'Building for native machine'
 OSX_SDK_ROOT=`xcrun --sdk macosx --show-sdk-path`
-try ./configure CC="clang -Qunused-arguments -fcolor-diagnostics" CFLAGS="--sysroot=$OSX_SDK_ROOT" 2>&1 >/dev/null
+try ./configure CC="$CCACHE clang -Qunused-arguments -fcolor-diagnostics" CFLAGS="--sysroot=$OSX_SDK_ROOT" 2>&1 >/dev/null
 try make 2>&1 >/dev/null
 try make Parser/pgen 2>&1 >/dev/null
 try mv python.exe hostpython
