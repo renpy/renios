@@ -8,7 +8,7 @@ export TMPROOT="$RENIOSDEPROOT/tmp"
 export CACHEROOT="$RENIOSDEPROOT/cache"
 
 # Set up path to include our gas-preprocessor.pl
-export $PATH="$RENIOSDEPROOT/scripts:$PATH"
+export PATH="$RENIOSDEPROOT/scripts:$PATH"
 
 # create build directories if not found
 try mkdir -p $CACHEROOT
@@ -21,7 +21,7 @@ export RENPY_VERSION=6.14.1
 export PYGAME_VERSION=1.9.1
 export FREETYPE_VERSION=2.3.12
 export FRIBIDI_VERSION=0.19.2
-export SDL_REVISION=45187a87d35b
+export SDL_VERSION=2.0.3
 export SDL2_TTF_REVISION=15fdede47c58
 export SDL2_IMAGE_REVISION=4a8d59cbf927
 export LIBAV_VERSION=0.7.6

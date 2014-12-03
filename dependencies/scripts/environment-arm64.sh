@@ -8,6 +8,7 @@ export TOOLCHAINROOT=$XCODEPATH/Toolchains/XcodeDefault.xctoolchain
 export SDKBASENAME=iphoneos
 export RENIOSARCH=arm64
 export RENIOSCPU=generic
+export MIN_SDK=6.0
 
 if [ ! -d $DEVROOT ]; then
   echo "Unable to found the Xcode iPhoneOS.platform"
@@ -27,9 +28,9 @@ export ARM_LD=$(xcrun -find -sdk iphoneos ld)
 export ARM_CFLAGS="-arch $RENIOSARCH"
 export ARM_CFLAGS="$ARM_CFLAGS -pipe -no-cpp-precomp"
 export ARM_CFLAGS="$ARM_CFLAGS -isysroot $IOSSDKROOT"
-export ARM_CFLAGS="$ARM_CFLAGS -miphoneos-version-min=$SDKVER"
+export ARM_CFLAGS="$ARM_CFLAGS -miphoneos-version-min=$MIN_SDK"
 export ARM_LDFLAGS="-arch $RENIOSARCH -isysroot $IOSSDKROOT"
-export ARM_LDFLAGS="$ARM_LDFLAGS -miphoneos-version-min=$SDKVER"
+export ARM_LDFLAGS="$ARM_LDFLAGS -miphoneos-version-min=$MIN_SDK"
 export ARM_HOST="arm-apple-darwin"
 
 export LIBAV_CONFIGURE_ARCH_CPU="--arch=$RENIOSARCH --cpu=$RENIOSCPU"

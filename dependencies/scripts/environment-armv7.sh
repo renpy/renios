@@ -8,6 +8,7 @@ export TOOLCHAINROOT=$XCODEPATH/Toolchains/XcodeDefault.xctoolchain
 export SDKBASENAME=iphoneos
 export RENIOSARCH=armv7
 export RENIOSCPU=cortex-a8
+export MIN_SDK=6.0
 
 # TODO Figure out if we need to specify multiple cpus for armv7 (i.e. also include arm1176jzf-s)
 
@@ -29,9 +30,9 @@ export ARM_LD=$(xcrun -find -sdk iphoneos ld)
 export ARM_CFLAGS="-arch $RENIOSARCH"
 export ARM_CFLAGS="$ARM_CFLAGS -pipe -no-cpp-precomp"
 export ARM_CFLAGS="$ARM_CFLAGS -isysroot $IOSSDKROOT"
-export ARM_CFLAGS="$ARM_CFLAGS -miphoneos-version-min=$SDKVER"
+export ARM_CFLAGS="$ARM_CFLAGS -miphoneos-version-min=$MIN_SDK"
 export ARM_LDFLAGS="-arch $RENIOSARCH -isysroot $IOSSDKROOT"
-export ARM_LDFLAGS="$ARM_LDFLAGS -miphoneos-version-min=$SDKVER"
+export ARM_LDFLAGS="$ARM_LDFLAGS -miphoneos-version-min=$MIN_SDK"
 export ARM_HOST="armv7-apple-darwin"
 
 export LIBAV_CONFIGURE_ARCH_CPU="--arch=$RENIOSARCH --cpu=$RENIOSCPU"

@@ -8,6 +8,7 @@ export TOOLCHAINROOT=$XCODEPATH/Toolchains/XcodeDefault.xctoolchain
 export SDKBASENAME=iphonesimulator
 export RENIOSARCH=x86_64
 export RENIOSCPU=x86_64
+export MIN_SDK=6.0
 
 if [ ! -d $DEVROOT ]; then
   echo "Unable to found the Xcode iPhoneSimulator.platform"
@@ -27,9 +28,9 @@ export ARM_LD=$(xcrun -find -sdk iphonesimulator ld)
 export ARM_CFLAGS="-arch $RENIOSARCH"
 export ARM_CFLAGS="$ARM_CFLAGS -pipe -no-cpp-precomp"
 export ARM_CFLAGS="$ARM_CFLAGS -isysroot $IOSSDKROOT"
-export ARM_CFLAGS="$ARM_CFLAGS -miphoneos-version-min=$SDKVER"
+export ARM_CFLAGS="$ARM_CFLAGS -miphoneos-version-min=$MIN_SDK"
 export ARM_LDFLAGS="-arch $RENIOSARCH -isysroot $IOSSDKROOT"
-export ARM_LDFLAGS="$ARM_LDFLAGS -miphoneos-version-min=$SDKVER"
+export ARM_LDFLAGS="$ARM_LDFLAGS -miphoneos-version-min=$MIN_SDK"
 export ARM_HOST="x86_64-apple-darwin"
 
 export LIBAV_CONFIGURE_ARCH_CPU="--arch=$RENIOSARCH --cpu=$RENIOSCPU"
