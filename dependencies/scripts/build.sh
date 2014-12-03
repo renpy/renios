@@ -15,17 +15,17 @@ echo "STARTING REN'IOS BUILD"
 
 # BUILD FOR SIMULATOR, i386
 
-echo "BUILDING FOR SIMULATOR i386 (DEBUG)"
-
-. $(dirname $0)/environment-simulator-i386.sh
-. $(dirname $0)/environment-debug.sh
-try $(dirname $0)/build-$RENIOSCOMPONENT.sh
-
-echo "BUILDING FOR SIMULATOR i386 (RELEASE)"
-
-. $(dirname $0)/environment-simulator-i386.sh
-. $(dirname $0)/environment-release.sh
-try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+#echo "BUILDING FOR SIMULATOR i386 (DEBUG)"
+#
+#. $(dirname $0)/environment-simulator-i386.sh
+#. $(dirname $0)/environment-debug.sh
+#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+#
+#echo "BUILDING FOR SIMULATOR i386 (RELEASE)"
+#
+#. $(dirname $0)/environment-simulator-i386.sh
+#. $(dirname $0)/environment-release.sh
+#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 # BUILD FOR SIMULATOR, x86_64
 
@@ -35,19 +35,19 @@ echo "BUILDING FOR SIMULATOR x86_64 (DEBUG)"
 . $(dirname $0)/environment-debug.sh
 try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
-echo "BUILDING FOR SIMULATOR x86_64 (RELEASE)"
+#echo "BUILDING FOR SIMULATOR x86_64 (RELEASE)"
 
-. $(dirname $0)/environment-simulator-x86_64.sh
-. $(dirname $0)/environment-release.sh
-try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+#. $(dirname $0)/environment-simulator-x86_64.sh
+#. $(dirname $0)/environment-release.sh
+#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 # BUILD FOR DEVICE, ARMV7
 
-echo "BUILDING FOR ARMV7 (DEBUG)"
-
-. $(dirname $0)/environment-armv7.sh
-. $(dirname $0)/environment-debug.sh
-try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+#echo "BUILDING FOR ARMV7 (DEBUG)"
+#
+#. $(dirname $0)/environment-armv7.sh
+#. $(dirname $0)/environment-debug.sh
+#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 echo "BUILDING FOR ARMV7 (RELEASE)"
 
@@ -71,11 +71,11 @@ try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 # BUILD FOR DEVICE, ARM64
 
-echo "BUILDING FOR ARM64 (DEBUG)"
-
-. $(dirname $0)/environment-arm64.sh
-. $(dirname $0)/environment-debug.sh
-try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+#echo "BUILDING FOR ARM64 (DEBUG)"
+#
+#. $(dirname $0)/environment-arm64.sh
+#. $(dirname $0)/environment-debug.sh
+#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 echo "BUILDING FOR ARM64 (RELEASE)"
 
