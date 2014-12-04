@@ -2,17 +2,34 @@
 
 . $(dirname $0)/utils.sh
 
-# Clone SDL_image if necessary
-if [ ! -d $TMPROOT/SDL_image ] ; then
-  echo 'Cloning SDL_image source'
-  try pushd $TMPROOT
-  try hg clone -u $SDL2_IMAGE_REVISION http://hg.libsdl.org/SDL_image SDL_image
-  try cd SDL_image
-  try popd
+# Download Python if necessary
+if [ ! -f $CACHEROOT/SDL2_image-$SDL2_IMAGE_VERSION.tar.gz ]; then
+    echo 'Downloading SDL2_image source'
+    curl -L https://www.libsdl.org/projects/SDL_image/release/SDL2_image-$SDL2_IMAGE_VERSION.tar.gz > $CACHEROOT/SDL2_image-$SDL2_IMAGE_VERSION.tar.gz
 fi
 
-try pushd $TMPROOT/SDL_image
-try hg up -r $SDL2_IMAGE_REVISION
+# Clean any previous extractions,
+rm -rf $TMPROOT/SDL2_image-$SDL2_IMAGE_VERSION
+# then extract SDL2_image source to cache directory
+echo 'Extracting SDL2_image source'
+try tar xzf $CACHEROOT/SDL2_image-$SDL2_IMAGE_VERSION.tar.gz -C $TMPROOT # 2>&1 >/dev/null
+try pushd $TMPROOT/SDL2_image-$SDL2_IMAGE_VERSION
+
+# Link SDL2 as SDL, so we can find it.
+rm $TMPROOT/SDL
+try ln -s $TMPROOT/SDL2-$SDL_VERSION $TMPROOT/SDL
+
+echo 'Building SDL'
+
+pushd $TMPROOT/SDL2_image-$SDL2_IMAGE_VERSION/Xcode-iOS
+try xcodebuild -project SDL_image.xcodeproj -target libSDL_image -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH clean
+try xcodebuild -project SDL_image.xcodeproj -target libSDL_image -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH 
+popd
+
+echo "Moving SDL_image products into place"
+try cp Xcode-iOS/build/$RENIOSBUILDCONFIGURATION-$SDKBASENAME/libSDL2_image.a $BUILDROOT/lib/libSDL2_image.a
+try cp -a SDL_image.h $BUILDROOT/include
+
 
 # Patch
 # echo 'Patching SDL_image source'
@@ -34,14 +51,3 @@ try hg up -r $SDL2_IMAGE_REVISION
 # try make clean
 # try make libSDL2_image.la
 
-echo "Building SDL_image"
-try pushd $TMPROOT/SDL_image/Xcode-iOS
-try xcodebuild -project SDL_image.xcodeproj -target libSDL_image -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH clean
-try xcodebuild -project SDL_image.xcodeproj -target libSDL_image -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH
-popd
-
-popd
-
-echo "Moving SDL_image products into place"
-try cp $TMPROOT/SDL_image/Xcode-iOS/build/$RENIOSBUILDCONFIGURATION-$SDKBASENAME/libSDL2_image.a $BUILDROOT/lib/libSDL2_image.a
-try cp -a $TMPROOT/SDL_image/SDL_image.h $BUILDROOT/include
