@@ -2,6 +2,7 @@
 
 . $(dirname $0)/utils.sh
 
+# try $(dirname $0)/build-zlib.sh
 try $(dirname $0)/build-python.sh
 try $(dirname $0)/build-sdl.sh
 try $(dirname $0)/build-libpng.sh

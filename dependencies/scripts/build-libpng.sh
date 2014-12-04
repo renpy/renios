@@ -2,43 +2,31 @@
 
 . $(dirname $0)/utils.sh
 
-# ftp://ftp.simplesystems.org//pub/libpng/png/src/history/libpng12/libpng-1.2.49.tar.bz2
-
-if [ ! -f $CACHEROOT/libpng-1.2.49.tar.bz2 ]; then
+if [ ! -f $CACHEROOT/libpng-$LIBPNG_VERSION.tar.gz ]; then
   echo 'Downloading libpng source'
-  try curl -L http://downloads.sourceforge.net/project/libpng/libpng12/older-releases/1.2.49/libpng-1.2.49.tar.bz2 > $CACHEROOT/libpng-1.2.49.tar.bz2
+  echo http://downloads.sourceforge.net/project/libpng/libpng16/$LIBPNG_VERSION/libpng-$LIBPNG_VERSION.tar.gz
+  
+  try curl -L http://downloads.sourceforge.net/project/libpng/libpng16/$LIBPNG_VERSION/libpng-$LIBPNG_VERSION.tar.gz > $CACHEROOT/libpng-$LIBPNG_VERSION.tar.gz
 fi
 
-try rm -rf $TMPROOT/libpng-1.2.49
+try rm -rf $TMPROOT/libpng-$LIBPNG_VERSION
 echo 'Extracting libpng source'
-try tar xjf $CACHEROOT/libpng-1.2.49.tar.bz2 2>&1 >/dev/null
-try mv libpng-1.2.49 $TMPROOT
+try tar xzf $CACHEROOT/libpng-$LIBPNG_VERSION.tar.gz 2>&1 >/dev/null
+try mv libpng-$LIBPNG_VERSION $TMPROOT
 
-pushd $TMPROOT/libpng-1.2.49
+pushd $TMPROOT/libpng-$LIBPNG_VERSION
 
-echo 'Configuring libpng'
-try autoreconf -fiv
-try ./configure --prefix=$DESTROOT \
-  --host="$ARM_HOST" \
-  --enable-static=yes \
-  --enable-shared=no \
-  CC="$ARM_CC" AR="$ARM_AR" \
-  LDFLAGS="$ARM_LDFLAGS" CFLAGS="$ARM_CFLAGS" 2>&1 >/dev/null
-try make clean 2>&1 >/dev/null
 echo 'Building libpng'
-try make 2>&1 >/dev/null
-try make install 2>&1 >/dev/null
+try cp scripts/pnglibconf.h.prebuilt pnglibconf.h
 
-popd
+SOURCE='png.c pngerror.c pngget.c pngmem.c pngpread.c pngread.c pngrio.c pngrtran.c pngrutil.c pngset.c pngtrans.c pngwio.c pngwrite.c pngwtran.c pngwutil.c'
+OBJS='png.o pngerror.o pngget.o pngmem.o pngpread.o pngread.o pngrio.o pngrtran.o pngrutil.o pngset.o pngtrans.o pngwio.o pngwrite.o pngwtran.o pngwutil.o'
+
+try $ARM_CC $ARM_CFLAGS -c $SOURCE 
+try $ARM_AR rcs libpng.a $OBJS
 
 echo 'Moving libpng build products into place'
-try cp $DESTROOT/lib/libpng12.a $BUILDROOT/lib
-try ln -sf libpng12.a $BUILDROOT/lib/libpng.a
+try cp -a libpng.a $BUILDROOT/lib/
+try cp png.h pngconf.h $BUILDROOT/include
 
-try cp -a $DESTROOT/include/libpng12 $BUILDROOT/include
-
-try rm -f $BUILDROOT/include/png.h
-try ln -sf libpng12/png.h $BUILDROOT/include/png.h
-
-try rm -f $BUILDROOT/include/pngconf.h
-try ln -sf libpng12/pngconf.h $BUILDROOT/include/pngconf.h
+popd
