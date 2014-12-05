@@ -19,7 +19,7 @@ try pushd $TMPROOT/SDL2_image-$SDL2_IMAGE_VERSION
 rm $TMPROOT/SDL
 try ln -s $TMPROOT/SDL2-$SDL_VERSION $TMPROOT/SDL
 
-echo 'Building SDL'
+echo 'Building SDL2_image'
 
 pushd $TMPROOT/SDL2_image-$SDL2_IMAGE_VERSION/Xcode-iOS
 try xcodebuild -project SDL_image.xcodeproj -target libSDL_image -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH clean

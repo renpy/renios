@@ -2,42 +2,31 @@
 
 . $(dirname $0)/utils.sh
 
-# Clone SDL_ttf if necessary
-if [ ! -d $TMPROOT/SDL_ttf ] ; then
-  echo 'Cloning SDL_ttf source'
-  try pushd $TMPROOT
-  try hg clone -u $SDL2_TTF_REVISION http://hg.libsdl.org/SDL_ttf SDL_ttf
-  try cd SDL_ttf
-  try popd
+if [ ! -f $CACHEROOT/SDL2_ttf-$SDL2_TTF_VERSION.tar.gz ]; then
+    echo 'Downloading SDL2_ttf source'
+    curl -L https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-$SDL2_TTF_VERSION.tar.gz > $CACHEROOT/SDL2_ttf-$SDL2_TTF_VERSION.tar.gz
 fi
 
-try pushd $TMPROOT/SDL_ttf
-try hg up -r $SDL2_TTF_REVISION
+# Clean any previous extractions,
+rm -rf $TMPROOT/SDL2_ttf-$SDL2_TTF_VERSION
+# then extract SDL2_ttf source to cache directory
+echo 'Extracting SDL2_ttf source'
+try tar xzf $CACHEROOT/SDL2_ttf-$SDL2_TTF_VERSION.tar.gz -C $TMPROOT # 2>&1 >/dev/null
+try pushd $TMPROOT/SDL2_ttf-$SDL2_TTF_VERSION
 
-# Patch
-# echo 'Patching SDL_ttf source'
-# try patch -p1 < $RENIOSDEPROOT/patches/SDL_ttf/SDL_ttf-$SDL2_TTF_REVISION-ios.patch
+# Link SDL2 as SDL, so we can find it.
+rm $TMPROOT/SDL
+try ln -s $TMPROOT/SDL2-$SDL_VERSION $TMPROOT/SDL
 
-set -x
-echo "Configuring SDL_ttf"
-try ./configure --prefix=$DESTROOT \
-  --with-freetype-prefix=$DESTROOT \
-  --host="$ARM_HOST" \
-  --enable-static=yes \
-  --enable-shared=no \
-  --without-x \
-  --disable-sdltest \
-  CC="$ARM_CC" AR="$ARM_AR" \
-  LDFLAGS="$ARM_LDFLAGS" \
-  CFLAGS="$ARM_CFLAGS -DHAVE_STRLCPY=1 -DHAVE_STRLEN=1" \
-  SDL_CONFIG="$BUILDROOT/bin/sdl-config" 2>&1 >/dev/null
+echo 'Building SDL2_ttf'
 
-echo "Building SDL_ttf"
-try make clean 2>&1 >/dev/null
-try make libSDL2_ttf.la 2>&1 >/dev/null
-
+pushd $TMPROOT/SDL2_ttf-$SDL2_TTF_VERSION/Xcode-iOS
+try xcodebuild -project SDL_ttf.xcodeproj -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH clean
+try xcodebuild -project SDL_ttf.xcodeproj -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH 
 popd
 
-echo "Moving SDL_ttf build products into place"
-try cp $TMPROOT/SDL_ttf/.libs/libSDL2_ttf.a $BUILDROOT/lib/libSDL2_ttf.a
-try cp -a $TMPROOT/SDL_ttf/SDL_ttf.h $BUILDROOT/include
+echo "Moving SDL_ttf products into place"
+try cp Xcode-iOS/build/$RENIOSBUILDCONFIGURATION-$SDKBASENAME/libSDL2_ttf.a $BUILDROOT/lib
+try cp -a SDL_ttf.h $BUILDROOT/include
+
+popd

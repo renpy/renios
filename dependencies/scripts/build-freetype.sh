@@ -4,7 +4,7 @@
 
 if [ ! -f $CACHEROOT/freetype-$FREETYPE_VERSION.tar.gz ]; then
   echo "Downloading freetype source"
-  try curl -L http://download.savannah.gnu.org/releases/freetype/freetype-old/freetype-$FREETYPE_VERSION.tar.gz > $CACHEROOT/freetype-$FREETYPE_VERSION.tar.gz
+  try curl -L http://download.savannah.gnu.org/releases/freetype/freetype-$FREETYPE_VERSION.tar.gz > $CACHEROOT/freetype-$FREETYPE_VERSION.tar.gz
 fi
 
 echo "Unpacking freetype"
