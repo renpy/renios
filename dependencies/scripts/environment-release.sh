@@ -3,6 +3,7 @@ export RENIOSBUILDCONFIGURATION=Release
 # Set up build locations
 export BUILDROOT="$RENIOSDEPROOT/build/$SDKBASENAME-$RENIOSARCH/release"
 export DESTROOT="$RENIOSDEPROOT/tmp/root/$SDKBASENAME-$RENIOSARCH/release"
+export PYARCH="$SDKBASENAME-$RENIOSARCH-release"
 
 # Release or debug?
 export ARM_CFLAGS="$ARM_CFLAGS -O3"
