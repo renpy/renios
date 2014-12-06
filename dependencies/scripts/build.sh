@@ -35,19 +35,19 @@ echo "BUILDING FOR SIMULATOR x86_64 (DEBUG)"
 . $(dirname $0)/environment-debug.sh
 try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
-#echo "BUILDING FOR SIMULATOR x86_64 (RELEASE)"
+echo "BUILDING FOR SIMULATOR x86_64 (RELEASE)"
 
-#. $(dirname $0)/environment-simulator-x86_64.sh
-#. $(dirname $0)/environment-release.sh
-#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+. $(dirname $0)/environment-simulator-x86_64.sh
+. $(dirname $0)/environment-release.sh
+try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 # BUILD FOR DEVICE, ARMV7
 
-#echo "BUILDING FOR ARMV7 (DEBUG)"
-#
-#. $(dirname $0)/environment-armv7.sh
-#. $(dirname $0)/environment-debug.sh
-#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+echo "BUILDING FOR ARMV7 (DEBUG)"
+
+. $(dirname $0)/environment-armv7.sh
+. $(dirname $0)/environment-debug.sh
+try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 echo "BUILDING FOR ARMV7 (RELEASE)"
 
@@ -57,25 +57,25 @@ try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 # BUILD FOR DEVICE, ARMV7S
 
-echo "BUILDING FOR ARMV7S (DEBUG)"
-
-. $(dirname $0)/environment-armv7s.sh
-. $(dirname $0)/environment-debug.sh
-try $(dirname $0)/build-$RENIOSCOMPONENT.sh
-
-echo "BUILDING FOR ARMV7S (RELEASE)"
-
-. $(dirname $0)/environment-armv7s.sh
-. $(dirname $0)/environment-release.sh
-try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+#echo "BUILDING FOR ARMV7S (DEBUG)"
+#
+#. $(dirname $0)/environment-armv7s.sh
+#. $(dirname $0)/environment-debug.sh
+#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+#
+#echo "BUILDING FOR ARMV7S (RELEASE)"
+#
+#. $(dirname $0)/environment-armv7s.sh
+#. $(dirname $0)/environment-release.sh
+#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 # BUILD FOR DEVICE, ARM64
 
-#echo "BUILDING FOR ARM64 (DEBUG)"
-#
-#. $(dirname $0)/environment-arm64.sh
-#. $(dirname $0)/environment-debug.sh
-#try $(dirname $0)/build-$RENIOSCOMPONENT.sh
+echo "BUILDING FOR ARM64 (DEBUG)"
+
+. $(dirname $0)/environment-arm64.sh
+. $(dirname $0)/environment-debug.sh
+try $(dirname $0)/build-$RENIOSCOMPONENT.sh
 
 echo "BUILDING FOR ARM64 (RELEASE)"
 
@@ -88,19 +88,16 @@ run_lipo () {
 
     try lipo -create -output $RENIOSDEPROOT/build/debug/lib/$1 \
         -arch x86_64 $RENIOSDEPROOT/build/iphonesimulator-x86_64/debug/lib/$1 \
-        -arch armv7s $RENIOSDEPROOT/build/iphoneos-armv7s/debug/lib/$1
-
-        #-arch armv7 $RENIOSDEPROOT/build/iphoneos-armv7/debug/lib/$1 \
-        #-arch arm64 $RENIOSDEPROOT/build/iphoneos-arm64/debug/lib/$1 \
+        -arch armv7 $RENIOSDEPROOT/build/iphoneos-armv7/debug/lib/$1 \
+        -arch arm64 $RENIOSDEPROOT/build/iphoneos-arm64/debug/lib/$1
+                        
+        # -arch armv7s $RENIOSDEPROOT/build/iphoneos-armv7s/debug/lib/$1
         #-arch i386 $RENIOSDEPROOT/build/iphonesimulator-i386/debug/lib/$1 \
 
     try lipo -create -output $RENIOSDEPROOT/build/release/lib/$1 \
+        -arch x86_64 $RENIOSDEPROOT/build/iphonesimulator-x86_64/release/lib/$1 \
         -arch armv7 $RENIOSDEPROOT/build/iphoneos-armv7/release/lib/$1 \
-        -arch armv7s $RENIOSDEPROOT/build/iphoneos-armv7s/release/lib/$1 \
         -arch arm64 $RENIOSDEPROOT/build/iphoneos-arm64/release/lib/$1
-
-        # -arch i386 $RENIOSDEPROOT/build/iphonesimulator-i386/release/lib/$1 \
-        # -arch x86_64 $RENIOSDEPROOT/build/iphonesimulator-x86_64/release/lib/$1 \
 }
 
 if [ "$RENIOSCOMPONENT" == "all" -o "$RENIOSCOMPONENT" == "final" ]; then
@@ -112,8 +109,8 @@ if [ "$RENIOSCOMPONENT" == "all" -o "$RENIOSCOMPONENT" == "final" ]; then
   try mkdir -p $RENIOSDEPROOT/build/debug/lib
 
   # Copy most (non-binary) files from one of the builds, doesn't matter which.
-  try cp -a $RENIOSDEPROOT/build/iphoneos-armv7s/debug/include $RENIOSDEPROOT/build/debug/
-  try cp -a $RENIOSDEPROOT/build/iphoneos-armv7s/debug/python $RENIOSDEPROOT/build/debug/
+  try cp -a $RENIOSDEPROOT/build/iphoneos-armv7/debug/include $RENIOSDEPROOT/build/debug/
+  try cp -a $RENIOSDEPROOT/build/iphoneos-armv7/debug/python $RENIOSDEPROOT/build/debug/
   # try cp -a $RENIOSDEPROOT/build/iphoneos-armv7s/debug/renpy $RENIOSDEPROOT/build/debug/
 
   try mkdir -p $RENIOSDEPROOT/build/release/lib

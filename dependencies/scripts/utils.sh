@@ -16,8 +16,8 @@ function deduplicate() {
   try ar x $1
   try ar rc $fn *.o
   try ranlib $fn
-  try rm $1
-  try cp $fn $1
+  try rm -f $1
+  try cp -f $fn $1
   try cd ..
   try rm -rf ddp
 
