@@ -138,9 +138,16 @@ if [ "$RENIOSCOMPONENT" == "all" -o "$RENIOSCOMPONENT" == "final" ]; then
   PROTOTYPE=$RENIOSDEPROOT/../prototype
   
   rm -Rf "$PROTOTYPE/prebuilt"
-  try mkdir -p "$PROTOTYPE/prebuilt/release/python"
-  try cp -a $RENIOSDEPROOT/build/release "$PROTOTYPE/prebuilt"
-  try cp -a $RENIOSDEPROOT/build/debug "$PROTOTYPE/prebuilt"
+  try mkdir -p "$PROTOTYPE/prebuilt/release/python/include/python2.7"
+  try cp "$RENIOSDEPROOT/build/release/python/include/python2.7/pyconfig.h" "$PROTOTYPE/prebuilt/release/python/include/python2.7"
+  try cp -a "$RENIOSDEPROOT/build/release/python/lib" "$PROTOTYPE/prebuilt/release/python"
+  try cp -a "$RENIOSDEPROOT/build/release/lib" "$PROTOTYPE/prebuilt/release/lib"
+  try cp -a "$RENIOSDEPROOT/build/release/include" "$PROTOTYPE/prebuilt/release/include"
+  try cp -a "$RENIOSDEPROOT/build/release/python/include/python2.7" "$PROTOTYPE/prebuilt/release/include"
+    
+  try mkdir -p "$PROTOTYPE/prebuilt/debug"
+  try cp -a "$RENIOSDEPROOT/build/debug/lib" "$PROTOTYPE/prebuilt/debug/lib"
+
 
 fi
 

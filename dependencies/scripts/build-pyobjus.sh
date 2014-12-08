@@ -24,9 +24,9 @@ HOSTPYTHON="$RENIOSDEPROOT/tmp/Python-$PYTHON_VERSION/hostpython"
 export KIVYIOSROOT=1
 
 echo 'Building pyobjus'
-try $HOSTPYTHON setup.py \
+try $HOSTPYTHON -O setup.py \
     build_ext -g -b build/lib.$PYARCH -t build/tmp.$PYARCH \
-    install --root $DESTROOT
+    install -O2 --root $DESTROOT
 
 unset KIYIOSROOT
             
@@ -36,7 +36,10 @@ try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/libpyobjus.a build/lib.$PYARCH
 
 try deduplicate $BUILDROOT/lib/libpyobjus.a
 
+rm -Rf "$BUILDROOT/python/lib/python2.7/site-packages/pyobjus"
 try cp -R "$DESTROOT/usr/local/lib/python2.7/site-packages/pyobjus" "$BUILDROOT/python/lib/python2.7/site-packages"
+
+ls "$BUILDROOT/python/lib/python2.7/site-packages/pyobjus"
 
 export CC="$OLD_CC"
 export CFLAGS="$OLD_CFLAGS"

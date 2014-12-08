@@ -19,6 +19,7 @@
 		E2845E1F1A350A57004BC3F8 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = E2845E1E1A350A57004BC3F8 /* main.c */; };
 		E2845E221A352617004BC3F8 /* lib in Resources */ = {isa = PBXBuildFile; fileRef = E2845E211A352617004BC3F8 /* lib */; };
 		E2845E241A353099004BC3F8 /* include in Resources */ = {isa = PBXBuildFile; fileRef = E2845E231A353099004BC3F8 /* include */; };
+		E2845E261A35483D004BC3F8 /* base in Resources */ = {isa = PBXBuildFile; fileRef = E2845E251A35483D004BC3F8 /* base */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,7 @@
 		E2845E1E1A350A57004BC3F8 /* main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		E2845E211A352617004BC3F8 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = lib; path = prebuilt/release/python/lib; sourceTree = "<group>"; };
 		E2845E231A353099004BC3F8 /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; name = include; path = prebuilt/release/python/include; sourceTree = "<group>"; };
+		E2845E251A35483D004BC3F8 /* base */ = {isa = PBXFileReference; lastKnownFileType = folder; path = base; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 		E22EF4BC1A33491100A74B9F = {
 			isa = PBXGroup;
 			children = (
+				E2845E251A35483D004BC3F8 /* base */,
 				E2845E231A353099004BC3F8 /* include */,
 				E2845E211A352617004BC3F8 /* lib */,
 				E2845E1E1A350A57004BC3F8 /* main.c */,
@@ -156,6 +159,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2845E261A35483D004BC3F8 /* base in Resources */,
 				E2845E241A353099004BC3F8 /* include in Resources */,
 				E2845E221A352617004BC3F8 /* lib in Resources */,
 			);
@@ -279,7 +283,7 @@
 				);
 				PRODUCT_NAME = prototype;
 				STRIP_STYLE = "non-global";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/prebuilt/release/include $(SRCROOT)/prebuilt/release/include/SDL2 $(SRCROOT)/prebuilt/release/python/include/python2.7";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/prebuilt/release/include $(SRCROOT)/prebuilt/release/include/SDL2 $(SRCROOT)/prebuilt/release/include/python2.7";
 			};
 			name = Debug;
 		};
@@ -302,7 +306,7 @@
 				);
 				PRODUCT_NAME = prototype;
 				STRIP_STYLE = "non-global";
-				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/prebuilt/release/include $(SRCROOT)/prebuilt/release/include/SDL2 $(SRCROOT)/prebuilt/release/python/include/python2.7";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/prebuilt/release/include $(SRCROOT)/prebuilt/release/include/SDL2 $(SRCROOT)/prebuilt/release/include/python2.7";
 			};
 			name = Release;
 		};

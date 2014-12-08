@@ -30,9 +30,9 @@ export PYGAME_SDL2_EXCLUDE="pygame_sdl2.mixer pygame_sdl2.mixer_music"
 export PYGAME_SDL2_INSTALL_HEADERS=1
 
 echo 'Building pygame_sdl2'
-try $HOSTPYTHON setup.py \
+try $HOSTPYTHON -OO setup.py \
     build_ext -g -b build/lib.$PYARCH -t build/tmp.$PYARCH \
-    install --root $DESTROOT
+    install -O2 --root $DESTROOT
     
 echo $DESTROOT
 
@@ -46,8 +46,11 @@ try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/libpygame.a build/lib.$PYARCH/
 
 deduplicate $BUILDROOT/lib/libpygame.a
 
+rm -Rf "$BUILDROOT/python/lib/python2.7/site-packages/pygame_sdl2" 
+rm -Rf "$BUILDROOT/include/pygame_sdl2"
 cp -R "$DESTROOT/usr/local/lib/python2.7/site-packages/pygame_sdl2" "$BUILDROOT/python/lib/python2.7/site-packages"
 cp -R "$DESTROOT/usr/local/include/python2.7/pygame_sdl2" "$BUILDROOT/include"
+ls "$BUILDROOT/python/lib/python2.7/site-packages/pygame_sdl2" 
 
 export CC="$OLD_CC"
 export CFLAGS="$OLD_CFLAGS"
