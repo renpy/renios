@@ -30,16 +30,18 @@ export PYGAME_SDL2_EXCLUDE="pygame_sdl2.mixer pygame_sdl2.mixer_music"
 export PYGAME_SDL2_INSTALL_HEADERS=1
 
 echo 'Building pygame_sdl2'
-try $HOSTPYTHON -OO setup.py \
+rm -Rf build/lib.$PYARCH
+rm -Rf build/tmp.$PYARCH
+
+try $HOSTPYTHON -O setup.py \
     build_ext -g -b build/lib.$PYARCH -t build/tmp.$PYARCH \
     install -O2 --root $DESTROOT
-    
-echo $DESTROOT
+
+try cp build/lib.$PYARCH/pygame_sdl2/*.so "$DESTROOT/usr/local/lib/python2.7/site-packages/pygame_sdl2"
 
 
 echo "Linking and deduplicating pygame_sdl2 libraries"
 rm -rf $BUILDROOT/lib/libpygame.a
-ls build/lib.$PYARCH
 try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/libpygame.a build/lib.$PYARCH/pygame_sdl2
 # bd=$TMPROOT/pygame-${PYGAME_VERSION}release/build/lib.macosx-*/pygame
 # try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/libpygame.a $bd
@@ -50,7 +52,6 @@ rm -Rf "$BUILDROOT/python/lib/python2.7/site-packages/pygame_sdl2"
 rm -Rf "$BUILDROOT/include/pygame_sdl2"
 cp -R "$DESTROOT/usr/local/lib/python2.7/site-packages/pygame_sdl2" "$BUILDROOT/python/lib/python2.7/site-packages"
 cp -R "$DESTROOT/usr/local/include/python2.7/pygame_sdl2" "$BUILDROOT/include"
-ls "$BUILDROOT/python/lib/python2.7/site-packages/pygame_sdl2" 
 
 export CC="$OLD_CC"
 export CFLAGS="$OLD_CFLAGS"

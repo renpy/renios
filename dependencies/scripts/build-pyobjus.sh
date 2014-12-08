@@ -28,9 +28,11 @@ try $HOSTPYTHON -O setup.py \
     build_ext -g -b build/lib.$PYARCH -t build/tmp.$PYARCH \
     install -O2 --root $DESTROOT
 
+try cp build/lib.$PYARCH/pyobjus/*.so "$DESTROOT/usr/local/lib/python2.7/site-packages/pyobjus"
+
 unset KIYIOSROOT
             
-echo "Linking and deduplicating pygame_sdl2 libraries"
+echo "Linking and deduplicating pyobjus libraries"
 rm -rf $BUILDROOT/lib/libpyobjus.a
 try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/libpyobjus.a build/lib.$PYARCH/pyobjus
 
@@ -38,8 +40,6 @@ try deduplicate $BUILDROOT/lib/libpyobjus.a
 
 rm -Rf "$BUILDROOT/python/lib/python2.7/site-packages/pyobjus"
 try cp -R "$DESTROOT/usr/local/lib/python2.7/site-packages/pyobjus" "$BUILDROOT/python/lib/python2.7/site-packages"
-
-ls "$BUILDROOT/python/lib/python2.7/site-packages/pyobjus"
 
 export CC="$OLD_CC"
 export CFLAGS="$OLD_CFLAGS"
