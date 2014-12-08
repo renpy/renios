@@ -5,3 +5,6 @@ xcuserdata
 /app-*
 /dist/*
 /sphinx/_build
+.DS_Store
+prototype/prebuilt/
+prototype/prototype.xcodeproj/project.xcworkspace/

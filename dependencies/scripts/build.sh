@@ -134,6 +134,13 @@ if [ "$RENIOSCOMPONENT" == "all" -o "$RENIOSCOMPONENT" == "final" ]; then
   try pushd $RENIOSDEPROOT/build/release/lib
   try xcrun strip -Sxr *.a
   try popd
+  
+  PROTOTYPE=$RENIOSDEPROOT/../prototype
+  
+  rm -Rf "$PROTOTYPE/prebuilt"
+  try mkdir -p "$PROTOTYPE/prebuilt/release/python"
+  try cp -a $RENIOSDEPROOT/build/release "$PROTOTYPE/prebuilt"
+  try cp -a $RENIOSDEPROOT/build/debug "$PROTOTYPE/prebuilt"
 
 fi
 
