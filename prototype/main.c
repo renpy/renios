@@ -25,20 +25,23 @@ static PyMethodDef iosembed_methods[] = {
     {NULL, NULL, 0, NULL}
 };
 
-PyMODINIT_FUNC initiosembed(void) {
+static PyMODINIT_FUNC initiosembed(void) {
     (void) Py_InitModule("iosembed", iosembed_methods);
 }
 
-int start_python(char *argv0) {
+void renios_extend_inittab(void);
+
+static int start_python(char *argv0) {
 	char *bundle = strdup(dirname(argv0));
 	char main[1024];
     char *args[] = { "python", NULL };
     FILE *f;
 
-    setenv("PYTHONVERBOSE", "2", 1);
+    // setenv("PYTHONVERBOSE", "2", 1);
     setenv("PYTHONOPTIMIZE", "2", 1);
 
     PyImport_AppendInittab("iosembed", initiosembed);
+    renios_extend_inittab();
 
     Py_SetProgramName(argv0);
     Py_SetPythonHome(bundle);
