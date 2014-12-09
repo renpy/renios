@@ -5,12 +5,40 @@
 #include <SDL.h>
 #include "Python.h"
 
+SDL_Window *window = NULL;;
+
+static PyObject *close_window(PyObject *self, PyObject *args) {
+    if (!PyArg_ParseTuple(args, "")) {
+        return NULL;
+    }
+
+    if (window) {
+		SDL_DestroyWindow(window);
+		window = NULL;
+    }
+
+    Py_RETURN_NONE;
+}
+
+static PyMethodDef iosembed_methods[] = {
+	{"close_window", close_window, METH_VARARGS, "Close the initial window."},
+    {NULL, NULL, 0, NULL}
+};
+
+PyMODINIT_FUNC initiosembed(void) {
+    (void) Py_InitModule("iosembed", iosembed_methods);
+}
 
 int start_python(char *argv0) {
 	char *bundle = strdup(dirname(argv0));
 	char main[1024];
     char *args[] = { "python", NULL };
     FILE *f;
+
+    setenv("PYTHONVERBOSE", "2", 1);
+    setenv("PYTHONOPTIMIZE", "2", 1);
+
+    PyImport_AppendInittab("iosembed", initiosembed);
 
     Py_SetProgramName(argv0);
     Py_SetPythonHome(bundle);
@@ -41,10 +69,7 @@ int start_python(char *argv0) {
     return 0;
 }
 
-int
-main(int argc, char *argv[])
-{
-	SDL_Window *window;
+int main(int argc, char *argv[]) {
 	SDL_Surface *surface;
 
 	SDL_Init(SDL_INIT_EVERYTHING);
@@ -52,7 +77,6 @@ main(int argc, char *argv[])
 	surface = SDL_GetWindowSurface(window);
 	SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0, 0x80, 0));
 	SDL_UpdateWindowSurface(window);
-	SDL_DestroyWindow(window);
 
 	return start_python(argv[0]);
 }

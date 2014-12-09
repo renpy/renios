@@ -1,1 +1,4 @@
-print "Hello from python on iOS."
+import iosembed
+iosembed.close_window()
+
+print "Made it."
