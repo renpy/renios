@@ -56,14 +56,16 @@ mkdir -p extralibs
 xcrun -sdk $SDKBASENAME lipo "$IOSSDKROOT/usr/lib/libgcc_s.1.dylib" -thin $RENIOSARCH -output extralibs/libgcc_s.10.4.dylib 2>&1 >/dev/null
 
 try cp $RENIOSDEPROOT/src/python/ModulesSetup Modules/Setup.local
+try cat $RENIOSDEPROOT/src/python/ModulesSetup.mobile >> Modules/Setup.local
 
 try ./configure CC="$ARM_CC" LD="$ARM_LD" \
-  CFLAGS="$ARM_CFLAGS" \
-  LDFLAGS="$ARM_LDFLAGS -Lextralibs/" \
+  CFLAGS="$ARM_CFLAGS -I$BUILDROOT/include/ffi" \
+  LDFLAGS="$ARM_LDFLAGS -L$BUILDROOT/lib -Lextralibs/" \
   --disable-toolbox-glue \
   --host="$ARM_HOST" \
   --prefix=/python \
   --without-doc-strings 2>&1 >/dev/null
+
 
 try make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen \
      CROSS_COMPILE_TARGET=yes 2>&1 >/dev/null
