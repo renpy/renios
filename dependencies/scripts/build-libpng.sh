@@ -27,6 +27,6 @@ try $ARM_AR rcs libpng.a $OBJS
 
 echo 'Moving libpng build products into place'
 try cp -a libpng.a $BUILDROOT/lib/
-try cp png.h pngconf.h $BUILDROOT/include
+try cp png.h pngconf.h pnglibconf.h $BUILDROOT/include
 
 popd
