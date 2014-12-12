@@ -15,7 +15,7 @@ try pushd $PYGAME_SDL2_ROOT
 OLD_CC="$CC"
 OLD_CFLAGS="$CFLAGS"
 OLD_LDSHARED="$LDSHARED"
-export CC="$ARM_CC"
+export CC="ccache $ARM_CC"
 export CFLAGS="$ARM_CFLAGS"
 export CFLAGS="$CFLAGS -I$BUILDROOT/include -I$BUILDROOT/include/SDL2"
 export LDSHARED="$RENIOSDEPROOT/scripts/liblink"

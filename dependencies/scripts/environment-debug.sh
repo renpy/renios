@@ -6,7 +6,6 @@ export DESTROOT="$RENIOSDEPROOT/tmp/root/$SDKBASENAME-$RENIOSARCH/debug"
 export PYARCH="$SDKBASENAME-$RENIOSARCH-debug"
 
 # Release or debug?
-export ARM_RENPY_CFLAGS="$ARM_CFLAGS -O0 -g"
 export ARM_CFLAGS="$ARM_CFLAGS -O0 -g"
 
 # create build directories if not found
