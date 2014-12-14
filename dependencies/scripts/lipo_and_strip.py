@@ -60,7 +60,6 @@ def run(deproot, build, lib):
             ])
         
     if not run:
-        print target, "is up to date."
         return
     
     print target, "needs lipo and strip."

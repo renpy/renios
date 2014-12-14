@@ -2,7 +2,7 @@
 
 . $(dirname $0)/utils.sh
 
-set -ex
+set -e
 
 RENIOSCOMPONENT=$1
 
