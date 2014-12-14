@@ -8,3 +8,4 @@ xcuserdata
 .DS_Store
 prototype/prebuilt/
 prototype/prototype.xcodeproj/project.xcworkspace/
+prototype/base/
