@@ -28,9 +28,11 @@ export RENPY_CYTHON=cython
 
 
 echo 'Building renpy'
-rm -Rf build/lib.$PYARCH
-rm -Rf build/tmp.$PYARCH
 
+if [ -z "NOCLEAN" ]; then
+	rm -Rf build/lib.$PYARCH
+	rm -Rf build/tmp.$PYARCH
+fi
 
 try $HOSTPYTHON -O setup.py \
     build_ext -g -b build/lib.$PYARCH -t build/tmp.$PYARCH \

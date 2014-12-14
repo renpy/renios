@@ -30,8 +30,11 @@ export PYGAME_SDL2_EXCLUDE="pygame_sdl2.mixer pygame_sdl2.mixer_music"
 export PYGAME_SDL2_INSTALL_HEADERS=1
 
 echo 'Building pygame_sdl2'
-rm -Rf build/lib.$PYARCH
-rm -Rf build/tmp.$PYARCH
+
+if [ -z "NOCLEAN" ]; then
+    rm -Rf build/lib.$PYARCH
+    rm -Rf build/tmp.$PYARCH
+fi
 
 try $HOSTPYTHON -O setup.py \
     build_ext -g -b build/lib.$PYARCH -t build/tmp.$PYARCH \
