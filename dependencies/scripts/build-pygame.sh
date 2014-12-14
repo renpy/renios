@@ -49,7 +49,7 @@ try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/libpygame.a build/lib.$PYARCH/
 # bd=$TMPROOT/pygame-${PYGAME_VERSION}release/build/lib.macosx-*/pygame
 # try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/libpygame.a $bd
 
-deduplicate $BUILDROOT/lib/libpygame.a
+# deduplicate $BUILDROOT/lib/libpygame.a
 
 rm -Rf "$BUILDROOT/python/lib/python2.7/site-packages/pygame_sdl2" 
 rm -Rf "$BUILDROOT/include/pygame_sdl2"

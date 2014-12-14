@@ -51,7 +51,7 @@ echo "Linking and deduplicating renpy libraries"
 
 rm -rf $BUILDROOT/lib/librenpy.a
 try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/librenpy.a $(find build/lib.$PYARCH -type d)
-try deduplicate $BUILDROOT/lib/librenpy.a
+# try deduplicate $BUILDROOT/lib/librenpy.a
 
 rm -Rf "$BUILDROOT/python/lib/python2.7/site-packages/renpy" 
 cp -R "$DESTROOT/usr/local/lib/python2.7/site-packages/renpy" "$BUILDROOT/python/lib/python2.7/site-packages"
