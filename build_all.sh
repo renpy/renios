@@ -1,9 +1,15 @@
 #!/bin/bash
 
-set -xe
+set -e
+
+builds="${1:-debug release}"
+platforms="${2:-x86_64 armv7 arm64}"
+
+echo $builds
+echo $platforms
 
 build () {
-     ./scripts/build.sh $1 
+     ./scripts/build.sh $1 "$builds" "$platforms"
 }
 
 build_once() {
