@@ -37,11 +37,29 @@ static int start_python(char *argv0) {
     char *args[] = { "python", NULL };
     FILE *f;
 
+    /* This would be how we would initialize the python modules if
+     * python supported builtin submodules inside a non-built-in package.
+     *
+     * Since it doesn't seem to, this just serves to ensure that the various
+     * module init functions exist in the final linked binary, so dlysym can
+     * find them.
+     */
+    if (getenv("THIS SHOULD NEVER BE SET")) {
+    	renios_extend_inittab();
+    }
+
     // setenv("PYTHONVERBOSE", "2", 1);
     setenv("PYTHONOPTIMIZE", "2", 1);
+    setenv("PYTHONDONTWRITEBYTECODE", "1", 1);
+    setenv("RENPY_IOS", "1", 1);
+    setenv("PYGAME_IOS", "1", 1);
+    setenv("RENPY_RENDERER", "gl", 1);
 
     PyImport_AppendInittab("iosembed", initiosembed);
-    renios_extend_inittab();
+
+    if (getenv("THIS SHOULD NEVER BE SET")) {
+    	renios_extend_inittab();
+    }
 
     Py_SetProgramName(argv0);
     Py_SetPythonHome(bundle);
@@ -73,13 +91,13 @@ static int start_python(char *argv0) {
 }
 
 int main(int argc, char *argv[]) {
-	SDL_Surface *surface;
-
-	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("ios window", 0, 0, 800, 600, 0);
-	surface = SDL_GetWindowSurface(window);
-	SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0, 0x80, 0));
-	SDL_UpdateWindowSurface(window);
+//	SDL_Surface *surface;
+//
+//	SDL_Init(SDL_INIT_EVERYTHING);
+//	window = SDL_CreateWindow("ios window", 0, 0, 800, 600, 0);
+//	surface = SDL_GetWindowSurface(window);
+//	SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0, 0x80, 0));
+//	SDL_UpdateWindowSurface(window);
 
 	return start_python(argv[0]);
 }
