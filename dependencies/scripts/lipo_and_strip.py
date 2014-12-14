@@ -66,6 +66,9 @@ def run(deproot, build, lib):
     
     subprocess.check_call(cmd)
     
+    if build != "release":
+        return
+    
     subprocess.check_call([
         "xcrun",
         "strip",
