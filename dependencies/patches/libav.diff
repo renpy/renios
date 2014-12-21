@@ -1,0 +1,20 @@
+--- ./libavutil/x86/x86inc.asm	2014-12-01 21:43:07.000000000 -0500
++++ ./libavutil/x86/x86inc.asm.new	2014-12-21 11:54:54.000000000 -0500
+@@ -65,7 +65,7 @@
+ ; aout does not support align=
+ ; NOTE: This section is out of sync with x264, in order to
+ ; keep supporting OS/2.
+-%macro SECTION_RODATA 0-1 16
++%macro SECTION_RODATA 0-1 32
+     %ifidn __OUTPUT_FORMAT__,aout
+         section .text
+     %else
+@@ -73,7 +73,7 @@
+     %endif
+ %endmacro
+ 
+-%macro SECTION_TEXT 0-1 16
++%macro SECTION_TEXT 0-1 32
+     %ifidn __OUTPUT_FORMAT__,aout
+         SECTION .text
+     %else

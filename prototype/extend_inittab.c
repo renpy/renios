@@ -22,6 +22,7 @@ PyMODINIT_FUNC initscrap(void);
 PyMODINIT_FUNC initsurface(void);
 PyMODINIT_FUNC inittransform(void);
 PyMODINIT_FUNC initpyobjus(void);
+PyMODINIT_FUNC initsound(void);
 PyMODINIT_FUNC initstyle(void);
 PyMODINIT_FUNC initstyleclass(void);
 PyMODINIT_FUNC initaccelerator(void);
@@ -70,6 +71,7 @@ void renios_extend_inittab(void) {
     PyImport_AppendInittab("pygame_sdl2.surface", initsurface);
     PyImport_AppendInittab("pygame_sdl2.transform", inittransform);
     PyImport_AppendInittab("pyobjus.pyobjus", initpyobjus);
+    PyImport_AppendInittab("pysdlsound.sound", initsound);
     PyImport_AppendInittab("renpy.style", initstyle);
     PyImport_AppendInittab("renpy.styleclass", initstyleclass);
     PyImport_AppendInittab("renpy.display.accelerator", initaccelerator);

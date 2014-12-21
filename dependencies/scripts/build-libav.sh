@@ -12,28 +12,18 @@ if [ ! -d $TMPROOT/libav-$LIBAV_VERSION ]; then
   try rm -rf $TMPROOT/libav-$LIBAV_VERSION
   try tar xvf $CACHEROOT/libav-$LIBAV_VERSION.tar.gz 2>&1 >/dev/null
   try mv libav-$LIBAV_VERSION $TMPROOT
+  pushd $TMPROOT/libav-$LIBAV_VERSION
+    try patch -p0 < $RENIOSDEPROOT/patches/libav.diff
+  popd
 fi
-
-# if [ -f $TMPROOT/libav-$LIBAV_VERSION/libfreetype-arm7.a ]; then
-#   exit 0;
-# fi
 
 set -x
 
-# With a little help from
-# https://gist.github.com/1162907
-# plus the renpy-deps config.
+export PATH="$(dirname $0):$PATH"
 
-  # --as="$RENIOSDEPROOT/scripts/gas-preprocessor.pl $ARM_CC" \
-
-
-# try cp $RENIOSDEPROOT/scripts/gas-preprocessor.pl $TMPROOT/libav-$LIBAV_VERSION/
-
-# lib not found, compile it
 echo "Configuring libav"
 pushd $TMPROOT/libav-$LIBAV_VERSION
 try ./configure --prefix=$DESTROOT \
-  --disable-asm \
   --cc="$ARM_CC" \
   --sysroot="$IOSSDKROOT" \
   --target-os=darwin \
@@ -97,20 +87,20 @@ try ./configure --prefix=$DESTROOT \
   --disable-devices \
   --disable-vdpau \
   --disable-filters \
-  --disable-bsfs 2>&1 >/dev/null
+  --disable-bsfs # 2>&1 >/dev/null
 echo "Building libav"
-try make clean 2>&1 >/dev/null
-try make 2>&1 >/dev/null
-try make install 2>&1 >/dev/null
+try make clean # 2>&1 >/dev/null
+try make # 2>&1 >/dev/null
+try make install # 2>&1 >/dev/null
 
 # Deduplicate shared symbols from libavcodec and libavutil.
-# 
+#
 # Manual instructions follow.
-# 
+#
 # Thanks to
 #   http://atnan.com/blog/2012/01/12/avoiding-duplicate-symbol-errors-during-linking-by-removing-classes-from-static-libraries
 # which also includes instructions for doing this for fat binaries.
-# 
+#
 # 1. List which .o files are in libavcodec.a and libavutil.a:
 #    $ ar -t libavcodec.a > libavcodec.list
 #    $ ar -t libavutil.a > libavutil.list
@@ -129,7 +119,7 @@ try make install 2>&1 >/dev/null
 # Or instead of steps 3-5, just ar -d libavcodec.a log2_tab.o
 
 echo "Deduplicating libav libraries"
-try ar -d $DESTROOT/lib/libavcodec.a inverse.o
+try ar -d $DESTROOT/lib/libavcodec.a log2_tab.o
 
 # copy to buildroot
 echo "Moving libav build products into place"
@@ -139,6 +129,7 @@ try cp $DESTROOT/lib/libavfilter.a $BUILDROOT/lib
 try cp $DESTROOT/lib/libavformat.a $BUILDROOT/lib
 try cp $DESTROOT/lib/libavutil.a $BUILDROOT/lib
 try cp $DESTROOT/lib/libswscale.a $BUILDROOT/lib
+try cp $DESTROOT/lib/libavresample.a $BUILDROOT/lib
 
 try rm -rdf $BUILDROOT/include/libavcodec
 try cp -a $DESTROOT/include/libavcodec $BUILDROOT/include
@@ -152,6 +143,8 @@ try rm -rdf $BUILDROOT/include/libavutil
 try cp -a $DESTROOT/include/libavutil $BUILDROOT/include
 try rm -rdf $BUILDROOT/include/libswscale
 try cp -a $DESTROOT/include/libswscale $BUILDROOT/include
+try rm -rdf $BUILDROOT/include/libavresample
+try cp -a $DESTROOT/include/libavresample $BUILDROOT/include
 
 
 popd

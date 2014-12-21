@@ -15,11 +15,11 @@ build () {
 build_once() {
     if [ ! -e ./build/built.$1 ] ; then
         build $1
-        touch ./build/built.$1  
+        touch ./build/built.$1
     fi
 }
-  
-  
+
+
 root=$(dirname $0)
 pushd $root/dependencies
 
@@ -34,6 +34,7 @@ build_once sdl2_ttf
 build_once sdl2_image
 build_once sdl2_gfx
 build_once pyobjus
+build_once libav
 build pygame
 build renpy
 build final
