@@ -22,6 +22,7 @@
 		E2845E261A35483D004BC3F8 /* base in Resources */ = {isa = PBXBuildFile; fileRef = E2845E251A35483D004BC3F8 /* base */; };
 		E2845E281A369E81004BC3F8 /* extend_inittab.c in Sources */ = {isa = PBXBuildFile; fileRef = E2845E271A369E81004BC3F8 /* extend_inittab.c */; };
 		E2845E2A1A36AD24004BC3F8 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2845E291A36AD24004BC3F8 /* libbz2.dylib */; };
+		E2AFEA441A46633F001ED72C /* ios-python in Resources */ = {isa = PBXBuildFile; fileRef = E2AFEA431A46633F001ED72C /* ios-python */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +55,7 @@
 		E2845E251A35483D004BC3F8 /* base */ = {isa = PBXFileReference; lastKnownFileType = folder; path = base; sourceTree = "<group>"; };
 		E2845E271A369E81004BC3F8 /* extend_inittab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = extend_inittab.c; sourceTree = "<group>"; };
 		E2845E291A36AD24004BC3F8 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
+		E2AFEA431A46633F001ED72C /* ios-python */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "ios-python"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		E22EF4BC1A33491100A74B9F = {
 			isa = PBXGroup;
 			children = (
+				E2AFEA431A46633F001ED72C /* ios-python */,
 				E2845E1E1A350A57004BC3F8 /* main.c */,
 				E2845E271A369E81004BC3F8 /* extend_inittab.c */,
 				E2845E251A35483D004BC3F8 /* base */,
@@ -125,7 +128,7 @@
 			dependencies = (
 			);
 			name = prototype;
-			productName = "prototype";
+			productName = prototype;
 			productReference = E22EF4C51A33491200A74B9F /* prototype.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -166,6 +169,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2AFEA441A46633F001ED72C /* ios-python in Resources */,
 				E2845E261A35483D004BC3F8 /* base in Resources */,
 				E2845E241A353099004BC3F8 /* include in Resources */,
 				E2845E221A352617004BC3F8 /* lib in Resources */,
@@ -281,12 +285,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/prebuilt/debug/lib";
 				OTHER_LDFLAGS = (
-                    "-lrenpy",
+					"-lrenpy",
 					"-lfribidi",
 					"-lpygame",
 					"-lSDL2_image",
@@ -318,12 +320,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/prebuilt/release/lib";
 				OTHER_LDFLAGS = (
-				    "-lrenpy",
+					"-lrenpy",
 					"-lfribidi",
 					"-lpygame",
 					"-lSDL2_image",

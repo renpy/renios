@@ -34,7 +34,8 @@ void renios_extend_inittab(void);
 static int start_python(char *argv0) {
 	char *bundle = strdup(dirname(argv0));
 	char main[1024];
-    char *args[] = { "python", NULL };
+    char pythonpath[1024];
+	char *args[] = { "python", NULL };
     FILE *f;
 
     /* This would be how we would initialize the python modules if
@@ -48,7 +49,10 @@ static int start_python(char *argv0) {
     	renios_extend_inittab();
     }
 
+    snprintf(pythonpath, 1024, "%s/ios-python", bundle);
+
     // setenv("PYTHONVERBOSE", "2", 1);
+    setenv("PYTHONPATH", pythonpath, 1);
     setenv("PYTHONOPTIMIZE", "2", 1);
     setenv("PYTHONDONTWRITEBYTECODE", "1", 1);
     setenv("RENPY_IOS", "1", 1);
