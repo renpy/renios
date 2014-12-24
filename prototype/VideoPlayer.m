@@ -39,9 +39,16 @@
     player = [ AVPlayer playerWithURL: url ];
 
     vpv = [[ VideoPlayerView alloc ] init ];
+    
     [ vpv setPlayer: player ];
+    vpv.opaque = YES;
+    vpv.backgroundColor = [ UIColor blackColor ];
+    
     vpv.frame = window.frame;
-    [ window addSubview: vpv];
+
+    
+    
+    [ [ [ window subviews ]  objectAtIndex: 0 ] addSubview: vpv];
     
     printf("Initialized VP with file %s\n", fn);
 
@@ -61,6 +68,8 @@
     if (playing && paused) {
         return YES;
     }
+    
+    vpv.frame = window.frame;
     
     if (! player.rate) {
         [ self stop ];
