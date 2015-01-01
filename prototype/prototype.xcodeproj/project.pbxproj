@@ -22,7 +22,6 @@
 		E2845E261A35483D004BC3F8 /* base in Resources */ = {isa = PBXBuildFile; fileRef = E2845E251A35483D004BC3F8 /* base */; };
 		E2845E281A369E81004BC3F8 /* extend_inittab.c in Sources */ = {isa = PBXBuildFile; fileRef = E2845E271A369E81004BC3F8 /* extend_inittab.c */; };
 		E2845E2A1A36AD24004BC3F8 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2845E291A36AD24004BC3F8 /* libbz2.dylib */; };
-		E2AFEA441A46633F001ED72C /* ios-python in Resources */ = {isa = PBXBuildFile; fileRef = E2AFEA431A46633F001ED72C /* ios-python */; };
 		E2AFEA461A4A40F3001ED72C /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AFEA451A4A40F3001ED72C /* VideoPlayer.m */; };
 /* End PBXBuildFile section */
 
@@ -56,7 +55,6 @@
 		E2845E251A35483D004BC3F8 /* base */ = {isa = PBXFileReference; lastKnownFileType = folder; path = base; sourceTree = "<group>"; };
 		E2845E271A369E81004BC3F8 /* extend_inittab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = extend_inittab.c; sourceTree = "<group>"; };
 		E2845E291A36AD24004BC3F8 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
-		E2AFEA431A46633F001ED72C /* ios-python */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "ios-python"; sourceTree = "<group>"; };
 		E2AFEA451A4A40F3001ED72C /* VideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -85,7 +83,6 @@
 			isa = PBXGroup;
 			children = (
 				E2AFEA451A4A40F3001ED72C /* VideoPlayer.m */,
-				E2AFEA431A46633F001ED72C /* ios-python */,
 				E2845E1E1A350A57004BC3F8 /* main.c */,
 				E2845E271A369E81004BC3F8 /* extend_inittab.c */,
 				E2845E251A35483D004BC3F8 /* base */,
@@ -172,7 +169,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2AFEA441A46633F001ED72C /* ios-python in Resources */,
 				E2845E261A35483D004BC3F8 /* base in Resources */,
 				E2845E241A353099004BC3F8 /* include in Resources */,
 				E2845E221A352617004BC3F8 /* lib in Resources */,

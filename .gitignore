@@ -10,3 +10,4 @@ prototype/prebuilt/
 prototype/prototype.xcodeproj/project.xcworkspace/
 prototype/base/
 *.pyc
+*.pyo
