@@ -32,7 +32,7 @@ if (((sys.version_info.major == 2) and (sys.version_info.minor < 7))
 import os
 import re
 import argparse
-import unicodedata
+# import unicodedata
 import time
 import random
 import json
@@ -1027,7 +1027,11 @@ class Unparser(object):
             return None
         if not self.has_nfd_comments():
             return text
-        return unicodedata.normalize('NFD', text)
+
+        # We should only have ASCII comments in the renios prototype project.
+
+        # return unicodedata.normalize('NFD', text)
+        return text
 
     def get_name(self, obj):
         return self.transform_to_nfd(self.getmember(obj, 'name'))
