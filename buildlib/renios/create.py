@@ -25,8 +25,6 @@ def replace_name(o, template, replacement, path=()):
         return o
 
     elif isinstance(o, basestring):
-        if template in o:
-            print path, o
         return o.replace(template, replacement)
 
     else:
