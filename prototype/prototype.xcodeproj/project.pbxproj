@@ -23,6 +23,8 @@
 		E2845E281A369E81004BC3F8 /* extend_inittab.c in Sources */ = {isa = PBXBuildFile; fileRef = E2845E271A369E81004BC3F8 /* extend_inittab.c */; };
 		E2845E2A1A36AD24004BC3F8 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2845E291A36AD24004BC3F8 /* libbz2.dylib */; };
 		E2AFEA461A4A40F3001ED72C /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AFEA451A4A40F3001ED72C /* VideoPlayer.m */; };
+		E2BB98831A631363009C927E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2BB98821A631363009C927E /* Media.xcassets */; };
+		E2BB98851A6357BE009C927E /* ios-presplash.png in Resources */ = {isa = PBXBuildFile; fileRef = E2BB98841A6357BE009C927E /* ios-presplash.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -56,6 +58,8 @@
 		E2845E271A369E81004BC3F8 /* extend_inittab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = extend_inittab.c; sourceTree = "<group>"; };
 		E2845E291A36AD24004BC3F8 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		E2AFEA451A4A40F3001ED72C /* VideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayer.m; sourceTree = "<group>"; };
+		E2BB98821A631363009C927E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		E2BB98841A6357BE009C927E /* ios-presplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-presplash.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +86,7 @@
 		E22EF4BC1A33491100A74B9F = {
 			isa = PBXGroup;
 			children = (
+				E2BB98821A631363009C927E /* Media.xcassets */,
 				E2AFEA451A4A40F3001ED72C /* VideoPlayer.m */,
 				E2845E1E1A350A57004BC3F8 /* main.c */,
 				E2845E271A369E81004BC3F8 /* extend_inittab.c */,
@@ -89,6 +94,7 @@
 				E2845E231A353099004BC3F8 /* include */,
 				E2845E211A352617004BC3F8 /* lib */,
 				E20E170E1A34DF1900820124 /* Info.plist */,
+				E2BB98841A6357BE009C927E /* ios-presplash.png */,
 				E22EF5071A33876B00A74B9F /* libz.dylib */,
 				E2845E291A36AD24004BC3F8 /* libbz2.dylib */,
 				E22EF5041A3352F600A74B9F /* MobileCoreServices.framework */,
@@ -171,7 +177,9 @@
 			files = (
 				E2845E261A35483D004BC3F8 /* base in Resources */,
 				E2845E241A353099004BC3F8 /* include in Resources */,
+				E2BB98831A631363009C927E /* Media.xcassets in Resources */,
 				E2845E221A352617004BC3F8 /* lib in Resources */,
+				E2BB98851A6357BE009C927E /* ios-presplash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,9 +289,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/prebuilt/debug/lib";
@@ -321,9 +330,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEAD_CODE_STRIPPING = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				"LIBRARY_SEARCH_PATHS[arch=*]" = "$(SRCROOT)/prebuilt/release/lib";

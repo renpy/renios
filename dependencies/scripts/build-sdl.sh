@@ -8,18 +8,18 @@ if [ ! -f $CACHEROOT/SDL2-$SDL_VERSION.tar.gz ]; then
     curl -L https://www.libsdl.org/release/SDL2-$SDL_VERSION.tar.gz > $CACHEROOT/SDL2-$SDL_VERSION.tar.gz
 fi
 
-# Clean any previous extractions,
 rm -rf $TMPROOT/SDL2-$SDL_VERSION
-# then extract SDL2 source to cache directory
 echo 'Extracting SDL2 source'
 try tar xzf $CACHEROOT/SDL2-$SDL_VERSION.tar.gz -C $TMPROOT # 2>&1 >/dev/null
+
 try pushd $TMPROOT/SDL2-$SDL_VERSION
+try patch -p1 < $RENIOSDEPROOT/patches/sdl/sdl-premain.diff
 
 echo 'Building SDL'
 
 pushd $TMPROOT/SDL2-$SDL_VERSION/Xcode-iOS/SDL
 try xcodebuild -project SDL.xcodeproj -target libSDL -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH clean
-try xcodebuild -project SDL.xcodeproj -target libSDL -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH 
+try xcodebuild -project SDL.xcodeproj -target libSDL -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH
 popd
 
 popd

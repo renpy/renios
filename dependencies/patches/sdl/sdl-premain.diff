@@ -1,0 +1,41 @@
+Only in SDL2-2.0.3-premain/Xcode-iOS/SDL: build
+diff -ur SDL2-2.0.3/src/video/uikit/SDL_uikitappdelegate.m SDL2-2.0.3-premain/src/video/uikit/SDL_uikitappdelegate.m
+--- SDL2-2.0.3/src/video/uikit/SDL_uikitappdelegate.m	2014-03-15 22:31:42.000000000 -0400
++++ SDL2-2.0.3-premain/src/video/uikit/SDL_uikitappdelegate.m	2015-01-11 22:22:36.000000000 -0500
+@@ -41,6 +41,8 @@
+ static int exit_status;
+ static UIWindow *launch_window;
+ 
++extern C_LINKAGE void SDL_premain(int argc, char **argv);
++
+ int main(int argc, char **argv)
+ {
+     int i;
+@@ -207,11 +209,12 @@
+     /* Keep the launch image up until we set a video mode */
+     launch_window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+ 
++    
+     UIViewController *splashViewController = [[SDL_splashviewcontroller alloc] init];
+     launch_window.rootViewController = splashViewController;
+     [launch_window addSubview:splashViewController.view];
+     [launch_window makeKeyAndVisible];
+-
++    
+     /* Set working directory to resource path */
+     [[NSFileManager defaultManager] changeCurrentDirectoryPath: [[NSBundle mainBundle] resourcePath]];
+ 
+@@ -220,8 +223,12 @@
+                         SDL_IdleTimerDisabledChanged, NULL);
+ 
+     SDL_SetMainReady();
++    
++    SDL_iPhoneSetEventPump(SDL_TRUE);
++    SDL_premain(forward_argc, forward_argv);
++    
+     [self performSelector:@selector(postFinishLaunch) withObject:nil afterDelay:0.0];
+-
++           
+     return YES;
+ }
+ 
