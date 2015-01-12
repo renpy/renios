@@ -25,14 +25,10 @@ def scale(src, size):
 
     factor = min(1.0 * w / sw, 1.0 * h / sh)
 
-    tw = int(sw * factor)
-    th = int(sh * factor)
-
-    src = pygame.transform.smoothscale(src, (tw, th))
 
     rv = pygame.Surface(size)
-    rv.fill((0, 0, 0, 255))
-    rv.blit(src, ( (w - tw) / 2, (h - th) / 2 ))
+    rv.fill(src.get_at((0, 0)))
+    rv.blit(src, ( (w - sw) / 2, (h - sh) / 2 ))
 
     return rv
 
