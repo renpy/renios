@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E218D27D1A69F7DF00698833 /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E218D27C1A69F7DF00698833 /* IAPHelper.m */; };
 		E22EF4F71A33523800A74B9F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E22EF4F61A33523800A74B9F /* UIKit.framework */; };
 		E22EF4F91A33524600A74B9F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E22EF4F81A33524600A74B9F /* Foundation.framework */; };
 		E22EF4FB1A33524F00A74B9F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E22EF4FA1A33524F00A74B9F /* CoreGraphics.framework */; };
@@ -41,6 +42,7 @@
 
 /* Begin PBXFileReference section */
 		E20E170E1A34DF1900820124 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E218D27C1A69F7DF00698833 /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
 		E22EF4C51A33491200A74B9F /* prototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = prototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E22EF4F61A33523800A74B9F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E22EF4F81A33524600A74B9F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -86,6 +88,7 @@
 		E22EF4BC1A33491100A74B9F = {
 			isa = PBXGroup;
 			children = (
+				E218D27C1A69F7DF00698833 /* IAPHelper.m */,
 				E2BB98821A631363009C927E /* Media.xcassets */,
 				E2AFEA451A4A40F3001ED72C /* VideoPlayer.m */,
 				E2845E1E1A350A57004BC3F8 /* main.c */,
@@ -190,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E218D27D1A69F7DF00698833 /* IAPHelper.m in Sources */,
 				E2845E1F1A350A57004BC3F8 /* main.c in Sources */,
 				E2845E281A369E81004BC3F8 /* extend_inittab.c in Sources */,
 				E2AFEA461A4A40F3001ED72C /* VideoPlayer.m in Sources */,

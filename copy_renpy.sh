@@ -12,6 +12,6 @@ popd
 rm -Rf $prototype/base || true
 mkdir $prototype/base
 
-cp -a --no-preserve=ownership $renpy/andtesting/game $prototype/base
+cp -a --no-preserve=ownership $renpy/iaptest/game $prototype/base
 cp -a --no-preserve=ownership $renpy/renpy $prototype/base
 cp -a --no-preserve=ownership $renpy/renpy.py $prototype/base/main.py
