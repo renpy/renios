@@ -13,6 +13,7 @@ echo 'Extracting SDL2 source'
 try tar xzf $CACHEROOT/SDL2-$SDL_VERSION.tar.gz -C $TMPROOT # 2>&1 >/dev/null
 
 try pushd $TMPROOT/SDL2-$SDL_VERSION
+
 try patch -p1 < $RENIOSDEPROOT/patches/sdl/sdl-premain.diff
 
 echo 'Building SDL'
