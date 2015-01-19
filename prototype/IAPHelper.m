@@ -25,6 +25,7 @@
 - (void) beginPurchase: (NSString *) identifier;
 - (BOOL) hasPurchased: (NSString *) identifier;
 - (BOOL) isDeferred: (NSString *) identifier;
+- (NSString *) formatPrice: (NSString *) identifier;
 @end;
 
 
@@ -143,5 +144,18 @@
     return [ self.deferred member: identifier ] != nil;
 }
 
+- (NSString *) formatPrice: (NSString *) identifier {
+    SKProduct *product = [ self.products objectForKey: identifier ];
+    
+    if (product == nil) {
+        return nil;
+    }
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [numberFormatter setLocale:product.priceLocale];
+    return [numberFormatter stringFromNumber:product.price];
+}
 
 @end
