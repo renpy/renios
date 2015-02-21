@@ -4,20 +4,21 @@
 
 # http://libav.org/releases/libav-0.7.6.tar.gz
 
+set -x
+
 if [ ! -f $CACHEROOT/libav-$LIBAV_VERSION.tar.gz ]; then
   echo 'Downloading libav sources'
   try curl -L http://libav.org/releases/libav-$LIBAV_VERSION.tar.gz > $CACHEROOT/libav-$LIBAV_VERSION.tar.gz
 fi
+
 if [ ! -d $TMPROOT/libav-$LIBAV_VERSION ]; then
   try rm -rf $TMPROOT/libav-$LIBAV_VERSION
-  try tar xvf $CACHEROOT/libav-$LIBAV_VERSION.tar.gz 2>&1 >/dev/null
-  try mv libav-$LIBAV_VERSION $TMPROOT
+  try tar xf $CACHEROOT/libav-$LIBAV_VERSION.tar.gz # 2>&1 >/dev/null
+  mv libav-$LIBAV_VERSION $TMPROOT
   pushd $TMPROOT/libav-$LIBAV_VERSION
     try patch -p0 < $RENIOSDEPROOT/patches/libav.diff
   popd
 fi
-
-set -x
 
 export PATH="$(dirname $0):$PATH"
 

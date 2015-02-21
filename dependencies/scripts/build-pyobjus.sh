@@ -22,6 +22,7 @@ export LDSHARED="$RENIOSDEPROOT/scripts/liblink"
 HOSTPYTHON="$RENIOSDEPROOT/tmp/Python-$PYTHON_VERSION/hostpython"
 
 export KIVYIOSROOT=1
+export ARCH=$RENIOSARCH
 
 echo 'Building pyobjus'
 try $HOSTPYTHON -O setup.py \
@@ -31,7 +32,7 @@ try $HOSTPYTHON -O setup.py \
 try cp build/lib.$PYARCH/pyobjus/*.so "$DESTROOT/usr/local/lib/python2.7/site-packages/pyobjus"
 
 unset KIYIOSROOT
-            
+
 echo "Linking and deduplicating pyobjus libraries"
 rm -rf $BUILDROOT/lib/libpyobjus.a
 try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/libpyobjus.a build/lib.$PYARCH/pyobjus
@@ -45,5 +46,5 @@ export CC="$OLD_CC"
 export CFLAGS="$OLD_CFLAGS"
 export LDSHARED="$OLD_LDSHARED"
 
-popd 
+popd
 
