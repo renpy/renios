@@ -23,13 +23,13 @@ for build in $builds; do
     else
       simulator=
     fi
-    
+
     echo "$build build for $platform..."
-    
+
 		. $(dirname $0)/environment-$simulator$platform.sh
 		. $(dirname $0)/environment-$build.sh
 		$(dirname $0)/build-$RENIOSCOMPONENT.sh
-        
+
   done
 done
 
@@ -52,11 +52,11 @@ if [ "$RENIOSCOMPONENT" == "all" -o "$RENIOSCOMPONENT" == "final" ]; then
   try cp -a $RENIOSDEPROOT/build/iphoneos-armv7/release/include $RENIOSDEPROOT/build/release/
   try cp -a $RENIOSDEPROOT/build/iphoneos-armv7/release/python $RENIOSDEPROOT/build/release/
   # try cp -a $RENIOSDEPROOT/build/iphoneos-armv7/release/renpy $RENIOSDEPROOT/build/release/
-    
+
   ./scripts/lipo_and_strip.py $RENIOSDEPROOT
 
   PROTOTYPE=$RENIOSDEPROOT/../prototype
-  
+
   rm -Rf "$PROTOTYPE/prebuilt"
   try mkdir -p "$PROTOTYPE/prebuilt/release/python/include/python2.7"
   try cp "$RENIOSDEPROOT/build/release/python/include/python2.7/pyconfig.h" "$PROTOTYPE/prebuilt/release/python/include/python2.7"
@@ -64,10 +64,14 @@ if [ "$RENIOSCOMPONENT" == "all" -o "$RENIOSCOMPONENT" == "final" ]; then
   try cp -a "$RENIOSDEPROOT/build/release/lib" "$PROTOTYPE/prebuilt/release/lib"
   try cp -a "$RENIOSDEPROOT/build/release/include" "$PROTOTYPE/prebuilt/release/include"
   try cp -a "$RENIOSDEPROOT/build/release/python/include/python2.7" "$PROTOTYPE/prebuilt/release/include"
-    
+
   try mkdir -p "$PROTOTYPE/prebuilt/debug"
   try cp -a "$RENIOSDEPROOT/build/debug/lib" "$PROTOTYPE/prebuilt/debug/lib"
 
+
+  try find "$PROTOTYPE/prebuilt/release/python/lib" -name \*.py -delete
+  try find "$PROTOTYPE/prebuilt/release/python/lib" -name \*.pyc -delete
+  try find "$PROTOTYPE/prebuilt/release/python/lib" -name install-sh -delete
 
 fi
 
