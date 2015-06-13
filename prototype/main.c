@@ -83,6 +83,7 @@ static int start_python(char *argv0) {
     args[0] = main;
     PySys_SetArgv(1, args);
 
+    PyRun_SimpleString("import iossupport");
     PyRun_SimpleFileEx(f, main, 1);
 
     if (PyErr_Occurred() != NULL) {

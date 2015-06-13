@@ -12,3 +12,7 @@ prototype/base/
 *.pyc
 *.pyo
 ._*
+version.txt
+dependencies/build
+dependencies/cache
+dependencies/tmp
