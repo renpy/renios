@@ -3,22 +3,21 @@ def open_url(url):
     if url.startswith("file:"):
         raise Exception("Opening file urls is not supported: " + url)
 
-    from pyobjus import autoclass, objc_str
-    NSURL = autoclass('NSURL')
-    UIApplication = autoclass("UIApplication")
+    try:
+        from pyobjus import autoclass, objc_str
+        NSURL = autoclass('NSURL')
+        UIApplication = autoclass("UIApplication")
 
-    nsurl = NSURL.URLWithString_(objc_str(url))
-    UIApplication.sharedApplication().openURL_(nsurl)
+        nsurl = NSURL.URLWithString_(objc_str(url))
+        UIApplication.sharedApplication().openURL_(nsurl)
+    except:
+        import traceback
+        traceback.print_exc()
+        raise
 
-# Web browser support.
-class IOSBrowser(object):
-    def open(self, url, new=0, autoraise=True):
-        open_url(url)
-    def open_new(self, url):
-        open_url(url)
-    def open_new_tab(self, url):
-        open_url(url)
-
+# webbrowser does weird things by default - it seems to be confused about
+# us being on a mac. Overriding these functions fixes the problem.
 import webbrowser
-webbrowser.register('ios', IOSBrowser, None, -1)
-
+webbrowser.open = open_url
+webbrowser.open_new = open_url
+webbrowser.open_new_tab = open_url
