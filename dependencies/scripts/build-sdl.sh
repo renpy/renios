@@ -5,7 +5,7 @@
 # Download Python if necessary
 if [ ! -f $CACHEROOT/SDL2-$SDL_VERSION.tar.gz ]; then
     echo 'Downloading SDL2 source'
-    curl -L https://www.libsdl.org/release/SDL2-$SDL_VERSION.tar.gz > $CACHEROOT/SDL2-$SDL_VERSION.tar.gz
+    curl -L $SDL_URL_PREFIX/SDL2-$SDL_VERSION.tar.gz > $CACHEROOT/SDL2-$SDL_VERSION.tar.gz
 fi
 
 rm -rf $TMPROOT/SDL2-$SDL_VERSION
@@ -14,7 +14,7 @@ try tar xzf $CACHEROOT/SDL2-$SDL_VERSION.tar.gz -C $TMPROOT # 2>&1 >/dev/null
 
 try pushd $TMPROOT/SDL2-$SDL_VERSION
 
-try patch -p1 < $RENIOSDEPROOT/patches/sdl/sdl-premain.diff
+# try patch -p1 < $RENIOSDEPROOT/patches/sdl/sdl-premain.diff
 
 echo 'Building SDL'
 

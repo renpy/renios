@@ -21,7 +21,11 @@ export PYTHON_VERSION=2.7.3
 # export PYGAME_VERSION=1.9.1
 export FREETYPE_VERSION=2.4.12
 export FRIBIDI_VERSION=0.19.2
-export SDL_VERSION=2.0.3
+
+
+export SDL_VERSION=2.0.4
+export SDL_URL_PREFIX=https://www.libsdl.org/tmp/release/
+
 export SDL2_GFX_VERSION=1.0.1
 export SDL2_TTF_VERSION=2.0.12
 export SDL2_IMAGE_VERSION=2.0.0
