@@ -25,8 +25,8 @@
 		E2845E2A1A36AD24004BC3F8 /* libbz2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E2845E291A36AD24004BC3F8 /* libbz2.dylib */; };
 		E2AFEA461A4A40F3001ED72C /* VideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AFEA451A4A40F3001ED72C /* VideoPlayer.m */; };
 		E2BB98831A631363009C927E /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2BB98821A631363009C927E /* Media.xcassets */; };
-		E2BB98851A6357BE009C927E /* ios-presplash.png in Resources */ = {isa = PBXBuildFile; fileRef = E2BB98841A6357BE009C927E /* ios-presplash.png */; };
 		E2EF82EF1B350A1D00A94E16 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2EF82EE1B350A1D00A94E16 /* CoreMotion.framework */; };
+		E2EF82F91B40D83600A94E16 /* Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E2EF82F81B40D83600A94E16 /* Log.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,8 +62,8 @@
 		E2845E291A36AD24004BC3F8 /* libbz2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.dylib; path = usr/lib/libbz2.dylib; sourceTree = SDKROOT; };
 		E2AFEA451A4A40F3001ED72C /* VideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayer.m; sourceTree = "<group>"; };
 		E2BB98821A631363009C927E /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
-		E2BB98841A6357BE009C927E /* ios-presplash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios-presplash.png"; sourceTree = "<group>"; };
 		E2EF82EE1B350A1D00A94E16 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		E2EF82F81B40D83600A94E16 /* Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Log.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +91,7 @@
 		E22EF4BC1A33491100A74B9F = {
 			isa = PBXGroup;
 			children = (
+				E2EF82F81B40D83600A94E16 /* Log.m */,
 				E2EF82EE1B350A1D00A94E16 /* CoreMotion.framework */,
 				E218D27C1A69F7DF00698833 /* IAPHelper.m */,
 				E2BB98821A631363009C927E /* Media.xcassets */,
@@ -101,7 +102,6 @@
 				E2845E231A353099004BC3F8 /* include */,
 				E2845E211A352617004BC3F8 /* lib */,
 				E20E170E1A34DF1900820124 /* Info.plist */,
-				E2BB98841A6357BE009C927E /* ios-presplash.png */,
 				E22EF5071A33876B00A74B9F /* libz.dylib */,
 				E2845E291A36AD24004BC3F8 /* libbz2.dylib */,
 				E22EF5041A3352F600A74B9F /* MobileCoreServices.framework */,
@@ -186,7 +186,6 @@
 				E2845E241A353099004BC3F8 /* include in Resources */,
 				E2BB98831A631363009C927E /* Media.xcassets in Resources */,
 				E2845E221A352617004BC3F8 /* lib in Resources */,
-				E2BB98851A6357BE009C927E /* ios-presplash.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E218D27D1A69F7DF00698833 /* IAPHelper.m in Sources */,
+				E2EF82F91B40D83600A94E16 /* Log.m in Sources */,
 				E2845E1F1A350A57004BC3F8 /* main.c in Sources */,
 				E2845E281A369E81004BC3F8 /* extend_inittab.c in Sources */,
 				E2AFEA461A4A40F3001ED72C /* VideoPlayer.m in Sources */,
