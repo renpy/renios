@@ -6,30 +6,6 @@
 #include <SDL_image.h>
 #include "Python.h"
 
-SDL_Window *window = NULL;;
-
-static PyObject *close_window(PyObject *self, PyObject *args) {
-    if (!PyArg_ParseTuple(args, "")) {
-        return NULL;
-    }
-
-    if (window) {
-		SDL_DestroyWindow(window);
-		window = NULL;
-    }
-
-    Py_RETURN_NONE;
-}
-
-static PyMethodDef iosembed_methods[] = {
-	{"close_window", close_window, METH_VARARGS, "Close the initial window."},
-    {NULL, NULL, 0, NULL}
-};
-
-static PyMODINIT_FUNC initiosembed(void) {
-    (void) Py_InitModule("iosembed", iosembed_methods);
-}
-
 void renios_extend_inittab(void);
 
 static int start_python(char *argv0) {
@@ -59,8 +35,6 @@ static int start_python(char *argv0) {
     setenv("RENPY_IOS", "1", 1);
     setenv("PYGAME_IOS", "1", 1);
     setenv("RENPY_RENDERER", "gl", 1);
-
-    PyImport_AppendInittab("iosembed", initiosembed);
 
     if (getenv("THIS SHOULD NEVER BE SET")) {
     	renios_extend_inittab();
