@@ -10,6 +10,9 @@
 // A map from a product identifier NSString to the corresponding project.
 @property NSMutableDictionary *products;
 
+// 1 if the queue is initialized, 0 otherwise.
+@property int initialized_queue;
+
 // 1 if an operation is in progress. 0 if no operation is in progress.
 @property int finished;
 
@@ -20,6 +23,7 @@
 @property NSMutableSet *deferred;
 
 - (id) init;
+- (void) initQueue;
 - (BOOL) canMakePayments;
 - (void) validateProductIdentifiers;
 - (void) beginPurchase: (NSString *) identifier;
@@ -37,13 +41,25 @@
     self.purchased = [ [ NSMutableSet alloc ] init ];
     self.deferred = [ [ NSMutableSet alloc ] init ];
     self.finished = 1;
-
-    [[SKPaymentQueue defaultQueue] addTransactionObserver: self];
+    self.initialized_queue = 0;
     
     return self;
 }
 
+- (void) initQueue {
+    if (self.initialized_queue) {
+        return;
+    }
+    
+    [[SKPaymentQueue defaultQueue] addTransactionObserver: self];
+    
+    self.initialized_queue = 1;
+    
+    return;
+}
+
 - (BOOL) canMakePayments {
+    [self initQueue];
     return [SKPaymentQueue canMakePayments];
 }
 
@@ -51,18 +67,22 @@
  
     SKProductsRequest *productsRequest = [[SKProductsRequest alloc]
                                           initWithProductIdentifiers:[NSSet setWithArray: self.productIdentifiers]];
+    self.finished = 0;
     productsRequest.delegate = self;
     [productsRequest start];
+
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     for (SKProduct *prod in response.products) {
         [ self.products setObject: prod forKey: prod.productIdentifier ];
     }
+    self.finished = 1;
 }
 
 
 - (void) beginPurchase: (NSString *) identifier {
+    [self initQueue];
     
     SKProduct *product = [ self.products objectForKey: identifier ];
     
@@ -80,6 +100,8 @@
 }
 
 - (void) restorePurchases {
+    [self initQueue];
+    
     self.finished = 0;
     
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions ];
