@@ -3,7 +3,7 @@
 set -e
 
 builds="${1:-debug release}"
-platforms="${2:-x86_64 armv7 arm64}"
+platforms="${2:-x86_64 armv7 arm64 i386}"
 
 echo $builds
 echo $platforms

@@ -14,11 +14,11 @@ fi
 . $(dirname $0)/environment.sh
 
 builds="${2:-debug release}"
-platforms="${3:-x86_64 armv7 arm64}"
+platforms="${3:-x86_64 i386 armv7 arm64}"
 
 for build in $builds; do
   for platform in $platforms; do
-    if [ $platform = "x86_64" ]; then
+    if [ $platform = "x86_64" -o $platform = "i386" ]; then
       simulator=simulator-
     else
       simulator=

@@ -21,6 +21,11 @@ try autoreconf -fiv 2>&1 >/dev/null
 
 # Under Xcode 5, this compile fails if -O is set to anything other than 0.
 
+#      LDFLAGS="-no-integrated-as $ARM_LDFLAGS" \
+#      CFLAGS="-no-integrated-as $ARM_CFLAGS -O0" \
+#      CCASFLAGS="-no-integrated-as $ARM_CFLAGS" \
+
+
 # The simd assembly hasn't been ported to arm64. We live without it and hope
 # the CPU is fast.
 if [ "$RENIOSARCH" = "arm64" ] ; then
@@ -44,15 +49,15 @@ else
       --enable-static \
       --disable-shared \
       CC="$ARM_REAL_CC" AR="$ARM_AR" \
-      LDFLAGS="-no-integrated-as $ARM_LDFLAGS" \
-      CFLAGS="-no-integrated-as $ARM_CFLAGS -O0" \
-      CCASFLAGS="-no-integrated-as $ARM_CFLAGS" \
-      CPPFLAGS="$ARM_CFLAGS"
+      CPPFLAGS="$ARM_CFLAGS" \
+      LDFLAGS="$ARM_LDFLAGS" \
+      CFLAGS="$ARM_CFLAGS -O0" \
+      CCASFLAGS="$ARM_CFLAGS"
 
             #        CFLAGS="-no-integrated-as $ARM_CFLAGS -O0" \
 
 fi
-    
+
 
 try make clean 2>&1 >/dev/null
 echo 'Building libjpeg-turbo'
