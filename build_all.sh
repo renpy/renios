@@ -34,7 +34,7 @@ build_once sdl2_ttf
 build_once sdl2_image
 build_once sdl2_gfx
 build_once pyobjus
-build_once libav
+build_once ffmpeg
 build iossupport
 build pygame
 build renpy
