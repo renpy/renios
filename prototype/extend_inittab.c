@@ -2,7 +2,6 @@
 #include "Python.h"
 
 PyMODINIT_FUNC init_renpy(void);
-PyMODINIT_FUNC initsound(void);
 PyMODINIT_FUNC initpyobjus(void);
 PyMODINIT_FUNC initfont(void);
 PyMODINIT_FUNC initdisplay(void);
@@ -48,10 +47,10 @@ PyMODINIT_FUNC initstyle_selected_activate_functions(void);
 PyMODINIT_FUNC initftfont(void);
 PyMODINIT_FUNC inittexwrap(void);
 PyMODINIT_FUNC inittextsupport(void);
+PyMODINIT_FUNC initrenpysound(void);
 
 void renios_extend_inittab(void) {
     PyImport_AppendInittab("_renpy", init_renpy);
-    PyImport_AppendInittab("pysdlsound.sound", initsound);
     PyImport_AppendInittab("pyobjus.pyobjus", initpyobjus);
     PyImport_AppendInittab("pygame_sdl2.font", initfont);
     PyImport_AppendInittab("pygame_sdl2.display", initdisplay);
@@ -97,4 +96,5 @@ void renios_extend_inittab(void) {
     PyImport_AppendInittab("renpy.text.ftfont", initftfont);
     PyImport_AppendInittab("renpy.text.texwrap", inittexwrap);
     PyImport_AppendInittab("renpy.text.textsupport", inittextsupport);
+    PyImport_AppendInittab("renpy.audio.renpysound", initrenpysound);
 }
