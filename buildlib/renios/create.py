@@ -113,7 +113,6 @@ def create_project(interface, dest):
     p = load_info_plist(dest)
     p["CFBundleName"] = unicode(name)
     p["CFBundleDisplayName"] = unicode(name)
-    p["CFBundleIdentifier"] = u"com.domain.application-name"
     save_info_plist(dest, p)
 
     interface.success("Created the Xcode project.")

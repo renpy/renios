@@ -151,7 +151,7 @@
 		E22EF4BD1A33491100A74B9F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Organization Name";
 				TargetAttributes = {
 					E22EF4C41A33491200A74B9F = {
@@ -227,6 +227,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -310,7 +311,7 @@
 					"-lrenpy",
 					"-lswscale",
 					"-lavresample",
-                                        "-lswresample",
+					"-lswresample",
 					"-lavformat",
 					"-lavcodec",
 					"-lavutil",
@@ -328,6 +329,7 @@
 					"-lffi",
 				);
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.domain.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = prototype;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -353,7 +355,7 @@
 					"-lrenpy",
 					"-lswscale",
 					"-lavresample",
-                                        "-lswresample",
+					"-lswresample",
 					"-lavformat",
 					"-lavcodec",
 					"-lavutil",
@@ -371,6 +373,7 @@
 					"-lffi",
 				);
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.domain.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = prototype;
 				SEPARATE_STRIP = NO;
 				STRIP_INSTALLED_PRODUCT = YES;
