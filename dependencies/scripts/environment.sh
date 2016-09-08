@@ -28,7 +28,7 @@ export SDL_URL_PREFIX=https://www.libsdl.org/tmp/release/
 
 export SDL2_GFX_VERSION=1.0.1
 export SDL2_TTF_VERSION=2.0.12
-export SDL2_IMAGE_VERSION=2.0.0
+export SDL2_IMAGE_VERSION=2.0.1
 export LIBPNG_VERSION=1.6.18
 export LIBJPEG_TURBO_VERSION=1.4.1
 export FFI_VERSION=3.2.1
