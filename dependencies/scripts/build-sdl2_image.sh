@@ -20,32 +20,10 @@ try ln -s $TMPROOT/SDL2-$SDL_VERSION $TMPROOT/SDL
 
 echo 'Building SDL2_image'
 
-
 set -ex
 
-pushd external/libwebp-0.3.0/
-
-./configure --prefix=$DESTROOT \
-    --host="$ARM_HOST" \
-    --enable-static \
-    --disable-shared \
-    CC="$ARM_REAL_CC" AR="$ARM_AR" \
-    CFLAGS="$ARM_CFLAGS" \
-    LDFLAGS="$ARM_LDFLAGS" \
-    CCASFLAGS="$ARM_CFLAGS" \
-    CPPFLAGS="$ARM_CFLAGS"
-
-make
-make install
-
-cp -a "$DESTROOT/include/webp" "$BUILDROOT/include"
-cp -a "$DESTROOT/lib/libwebp.a" "$BUILDROOT/lib"
-
-popd
-
-
 LOCAL_CFLAGS="-DSDL_IMAGE_USE_COMMON_BACKEND -DLOAD_BMP -DLOAD_GIF -DLOAD_LBM -DLOAD_PCX -DLOAD_PNM -DLOAD_TGA -DLOAD_XCF -DLOAD_XPM -DLOAD_XV -DLOAD_PNG -DLOAD_WEBP -DLOAD_JPG"
-BUILD_CFLAGS="-I$BUILDROOT/include -I$BUILDROOT/include/SDL2 -Iexternals."
+BUILD_CFLAGS="-I$BUILDROOT/include -I$BUILDROOT/include/SDL2 "
 SOURCE="IMG.c IMG_gif.c   IMG_lbm.c   IMG_png.c   IMG_tga.c   IMG_webp.c  IMG_xpm.c   IMG_xxx.c IMG_bmp.c   IMG_jpg.c   IMG_pcx.c   IMG_pnm.c   IMG_tif.c   IMG_xcf.c   IMG_xv.c"
 OBJS="IMG.o IMG_gif.o   IMG_lbm.o   IMG_png.o   IMG_tga.o   IMG_webp.o  IMG_xpm.o   IMG_xxx.o IMG_bmp.o   IMG_jpg.o   IMG_pcx.o   IMG_pnm.o   IMG_tif.o   IMG_xcf.o   IMG_xv.o"
 
@@ -57,7 +35,7 @@ $ARM_AR rcs libSDL_image.a $OBJS
 cp -a libSDL_image.a "$BUILDROOT/lib/libSDL_image.a"
 cp -a SDL_image.h $BUILDROOT/include
 
-exit 0
+popd
 
 
 # pushd $TMPROOT/SDL2_image-$SDL2_IMAGE_VERSION/Xcode-iOS
