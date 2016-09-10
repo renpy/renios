@@ -31,12 +31,12 @@ SOURCE="IMG.c IMG_gif.c   IMG_lbm.c   IMG_png.c   IMG_tga.c   IMG_webp.c  IMG_xp
 OBJS="IMG.o IMG_gif.o   IMG_lbm.o   IMG_png.o   IMG_tga.o   IMG_webp.o  IMG_xpm.o   IMG_xxx.o IMG_bmp.o   IMG_jpg.o   IMG_pcx.o   IMG_pnm.o   IMG_tif.o   IMG_xcf.o   IMG_xv.o"
 
 $ARM_CC $ARM_CFLAGS $BUILD_CFLAGS $LOCAL_CFLAGS -c $SOURCE
-$ARM_AR rcs libSDL_image.a $OBJS
+$ARM_AR rcs libSDL2_image.a $OBJS
 
 ls -l $OBJS
 
 # echo "Moving SDL_image products into place"
-cp -a libSDL_image.a "$BUILDROOT/lib/libSDL_image.a"
+cp -a libSDL2_image.a "$BUILDROOT/lib/libSDL2_image.a"
 cp -a SDL_image.h $BUILDROOT/include
 
 popd

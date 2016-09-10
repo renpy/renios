@@ -32,7 +32,7 @@ build_once fribidi
 build_once freetype
 build_once sdl2_ttf
 build_once libwebp
-build sdl2_image
+build_once sdl2_image
 build_once sdl2_gfx
 build_once pyobjus
 build_once ffmpeg
