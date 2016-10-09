@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 . $(dirname $0)/utils.sh
 
 # From https://github.com/kivy/kivy-ios
@@ -38,7 +40,7 @@ CCACHE=ccache
 
 echo 'Building for native machine'
 OSX_SDK_ROOT=`xcrun --sdk macosx --show-sdk-path`
-try ./configure CC="$CCACHE clang -Qunused-arguments -fcolor-diagnostics" CFLAGS="--sysroot=$OSX_SDK_ROOT" 2>&1 >/dev/null
+try ./configure --enable-ipv6 CC="$CCACHE clang -Qunused-arguments -fcolor-diagnostics" CFLAGS="--sysroot=$OSX_SDK_ROOT"
 try make 2>&1 >/dev/null
 try make Parser/pgen 2>&1 >/dev/null
 try mv python.exe hostpython
@@ -68,7 +70,10 @@ try ./configure CC="$ARM_CC" LD="$ARM_LD" \
   --disable-toolbox-glue \
   --host="$ARM_HOST" \
   --prefix=/python \
-  --without-doc-strings 2>&1 >/dev/null
+  --enable-ipv6 \
+  --without-doc-strings \
+   ac_cv_buggy_getaddrinfo=no
+    # 2>&1 >/dev/null
 
 
 try make HOSTPYTHON=./hostpython HOSTPGEN=./Parser/hostpgen \
