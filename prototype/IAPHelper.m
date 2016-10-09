@@ -14,6 +14,9 @@
 @property int initialized_queue;
 
 // 1 if an operation is in progress. 0 if no operation is in progress.
+@property int validated;
+
+// 1 if an operation is in progress. 0 if no operation is in progress.
 @property int finished;
 
 // The set of identifiers for purchased products.
@@ -21,6 +24,9 @@
 
 // The set of identifiers for deferred products.
 @property NSMutableSet *deferred;
+
+// The title to use for the dialog window.
+@property NSString *dialogTitle;
 
 - (id) init;
 - (void) initQueue;
@@ -43,9 +49,11 @@ UIAlertView *alert;
     self.products = [ [ NSMutableDictionary alloc] init];
     self.purchased = [ [ NSMutableSet alloc ] init ];
     self.deferred = [ [ NSMutableSet alloc ] init ];
+    self.validated = 1;
     self.finished = 1;
     self.initialized_queue = 0;
-
+    self.dialogTitle = @"Contacting App Store\nPlease Wait...";
+    
     return self;
 }
 
@@ -88,7 +96,7 @@ UIAlertView *alert;
 
 - (void) showDialog {
 
-    alert = [[UIAlertView alloc] initWithTitle:@"Contacting App Store\nPlease Wait..." message:nil delegate:self cancelButtonTitle: nil otherButtonTitles: nil];
+    alert = [[UIAlertView alloc] initWithTitle:self.dialogTitle message:nil delegate:self cancelButtonTitle: nil otherButtonTitles: nil];
 
     [alert show];
 
