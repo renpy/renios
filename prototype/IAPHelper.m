@@ -31,6 +31,7 @@
 - (id) init;
 - (void) initQueue;
 - (BOOL) canMakePayments;
+- (void) validateProductIdentifiersInBackground;
 - (void) validateProductIdentifiers;
 - (void) beginPurchase: (NSString *) identifier;
 - (BOOL) hasPurchased: (NSString *) identifier;
@@ -49,7 +50,7 @@ UIAlertView *alert;
     self.products = [ [ NSMutableDictionary alloc] init];
     self.purchased = [ [ NSMutableSet alloc ] init ];
     self.deferred = [ [ NSMutableSet alloc ] init ];
-    self.validated = 1;
+    self.validated = 0;
     self.finished = 1;
     self.initialized_queue = 0;
     self.dialogTitle = @"Contacting App Store\nPlease Wait...";
@@ -75,27 +76,54 @@ UIAlertView *alert;
 }
 
 - (void) validateProductIdentifiers {
-
+ 
+    printf("Starting validation.\n");
+    
+    if (self.validated) {
+        printf("Already validated.\n");
+        self.finished = 1;
+        return;
+    }
+    
     [self showDialog];
-
+    
     SKProductsRequest *productsRequest = [[SKProductsRequest alloc]
                                           initWithProductIdentifiers:[NSSet setWithArray: self.productIdentifiers]];
     self.finished = 0;
     productsRequest.delegate = self;
     [productsRequest start];
+    
+}
 
+- (void) validateProductIdentifiersInBackground {
+    
+    SKProductsRequest *productsRequest = [[SKProductsRequest alloc]
+                                          initWithProductIdentifiers:[NSSet setWithArray: self.productIdentifiers]];
+    self.validated = 0;
+    productsRequest.delegate = self;
+    [productsRequest start];
+    
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
     for (SKProduct *prod in response.products) {
         [ self.products setObject: prod forKey: prod.productIdentifier ];
     }
+    
     [self hideDialog];
+
+    self.validated = 1;
     self.finished = 1;
+
+    printf("Validated product identifiers.\n");
 }
 
 - (void) showDialog {
 
+    if (alert != nil) {
+        return;
+    }
+    
     alert = [[UIAlertView alloc] initWithTitle:self.dialogTitle message:nil delegate:self cancelButtonTitle: nil otherButtonTitles: nil];
 
     [alert show];
@@ -114,11 +142,13 @@ UIAlertView *alert;
 }
 
 - (void) hideDialog {
-    [alert dismissWithClickedButtonIndex:0 animated:YES];
+    if (alert != nil) {
+        [alert dismissWithClickedButtonIndex:0 animated:YES];
+        alert = nil;
+    }
 }
 
 - (void) beginPurchase: (NSString *) identifier {
-    [self showDialog];
     [self initQueue];
 
     SKProduct *product = [ self.products objectForKey: identifier ];
@@ -126,6 +156,8 @@ UIAlertView *alert;
     if (product == nil) {
         return;
     }
+
+    [self showDialog];
 
     self.finished = 0;
 
