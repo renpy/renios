@@ -2,6 +2,7 @@ import xcodeprojer
 import shutil
 import os
 import plistlib
+import re
 
 RENIOS = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -30,6 +31,7 @@ def replace_name(o, template, replacement, path=()):
     else:
         raise Exception("Unknown Xcode entry %r at %r." % (o, path))
 
+
 def load_info_plist(dest):
     """
     Loads the Info.plist dict from `dest`.
@@ -37,6 +39,7 @@ def load_info_plist(dest):
 
     with open(os.path.join(dest, "Info.plist"), "rb") as f:
         return plistlib.readPlist(f)
+
 
 def save_info_plist(dest, d):
     """
@@ -55,6 +58,7 @@ def save_info_plist(dest, d):
 
     os.rename(fn + ".new", fn)
 
+
 def create_project(interface, dest):
     """
     Copies the prototype project to `dest`, which must not already exists. Renames the
@@ -62,6 +66,7 @@ def create_project(interface, dest):
     """
 
     name = os.path.basename(dest)
+    shortname = re.sub(r'[^-_a-Za-Z0-9]', '', name)
 
     if os.path.exists(dest):
         interface.fail("{} already exists. If you would like to create an new project, please move the existing project out of the way.".format(dest))
@@ -83,7 +88,6 @@ def create_project(interface, dest):
         elif os.path.exists(path):
             os.unlink(path)
 
-
     rm("base")
     rm("prototype.xcodeproj/project.xcworkspace")
     rm("prototype.xcodeproj/xcuserdata")
@@ -95,6 +99,8 @@ def create_project(interface, dest):
     with open(pbxproj, "r") as f:
         root, _parseinfo = xcodeprojer.parse(f.read())
 
+    root = replace_name(root, "XHTE5H7Z79", "TEAMID")
+    root = replace_name(root, "org.renpy", "com.domain")
     root = replace_name(root, "prototype", name)
 
     output = xcodeprojer.unparse(root, format="xcode", projectname=name)
@@ -111,7 +117,7 @@ def create_project(interface, dest):
 
     # Update the Info.plist.
     p = load_info_plist(dest)
-    p["CFBundleName"] = unicode(name)
+    p["CFBundleName"] = unicode(shortname)
     p["CFBundleDisplayName"] = unicode(name)
     save_info_plist(dest, p)
 
