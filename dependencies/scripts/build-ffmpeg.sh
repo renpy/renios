@@ -32,6 +32,7 @@ try ./configure --prefix=$DESTROOT \
     --enable-cross-compile \
     --enable-static \
     --disable-shared \
+    --disable-programs \
     --enable-memalign-hack \
     --enable-runtime-cpudetect \
     --enable-avresample \
@@ -95,12 +96,13 @@ try ./configure --prefix=$DESTROOT \
     --disable-vda \
     --disable-vdpau \
     --disable-videotoolbox \
-    --disable-iconv
+    --disable-iconv \
+    --enable-pic
 
 
 echo "Building ffmpeg"
 try make clean # 2>&1 >/dev/null
-try make # 2>&1 >/dev/null
+try make V=1 # 2>&1 >/dev/null
 try make install # 2>&1 >/dev/null
 
 # Deduplicate shared symbols from libavcodec and libavutil.
