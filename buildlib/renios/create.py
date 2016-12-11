@@ -66,7 +66,7 @@ def create_project(interface, dest):
     """
 
     name = os.path.basename(dest)
-    shortname = re.sub(r'[^-_a-Za-Z0-9]', '', name)
+    shortname = re.sub(r'[^-_A-Za-z0-9]', '', name)
 
     if os.path.exists(dest):
         interface.fail("{} already exists. If you would like to create an new project, please move the existing project out of the way.".format(dest))
