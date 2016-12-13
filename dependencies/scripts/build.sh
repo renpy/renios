@@ -28,6 +28,11 @@ for build in $builds; do
 
 		. $(dirname $0)/environment-$simulator$platform.sh
 		. $(dirname $0)/environment-$build.sh
+
+        export ARM_CC="ccache $ARM_CC"
+        export ARM_AR="ccache $ARM_AR"
+        export ARM_LD="ccache $ARM_LD"
+
 		$(dirname $0)/build-$RENIOSCOMPONENT.sh
 
   done

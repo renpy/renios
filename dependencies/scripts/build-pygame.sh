@@ -15,7 +15,7 @@ try pushd $PYGAME_SDL2_ROOT
 OLD_CC="$CC"
 OLD_CFLAGS="$CFLAGS"
 OLD_LDSHARED="$LDSHARED"
-export CC="ccache $ARM_CC"
+export CC="$ARM_CC"
 export CFLAGS="$ARM_CFLAGS"
 export CFLAGS="$CFLAGS -I$BUILDROOT/include -I$BUILDROOT/include/SDL2"
 export LDSHARED="$RENIOSDEPROOT/scripts/liblink"
@@ -51,7 +51,7 @@ try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/libpygame.a build/lib.$PYARCH/
 
 # deduplicate $BUILDROOT/lib/libpygame.a
 
-rm -Rf "$BUILDROOT/python/lib/python2.7/site-packages/pygame_sdl2" 
+rm -Rf "$BUILDROOT/python/lib/python2.7/site-packages/pygame_sdl2"
 rm -Rf "$BUILDROOT/include/pygame_sdl2"
 cp -R "$DESTROOT/usr/local/lib/python2.7/site-packages/pygame_sdl2" "$BUILDROOT/python/lib/python2.7/site-packages"
 cp -R "$DESTROOT/usr/local/include/python2.7/pygame_sdl2" "$BUILDROOT/include"
