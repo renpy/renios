@@ -32,33 +32,6 @@ def replace_name(o, template, replacement, path=()):
         raise Exception("Unknown Xcode entry %r at %r." % (o, path))
 
 
-def load_info_plist(dest):
-    """
-    Loads the Info.plist dict from `dest`.
-    """
-
-    with open(os.path.join(dest, "Info.plist"), "rb") as f:
-        return plistlib.readPlist(f)
-
-
-def save_info_plist(dest, d):
-    """
-    Saves `d` as the Info.plist in `dest`.
-    """
-
-    fn = os.path.join(dest, "Info.plist")
-
-    with open(fn + ".new", "wb") as f:
-        return plistlib.writePlist(d, f)
-
-    try:
-        os.unlink(fn)
-    except:
-        pass
-
-    os.rename(fn + ".new", fn)
-
-
 def create_project(interface, dest):
     """
     Copies the prototype project to `dest`, which must not already exists. Renames the
@@ -114,11 +87,5 @@ def create_project(interface, dest):
         pass
 
     os.rename(pbxproj + ".new", pbxproj)
-
-    # Update the Info.plist.
-    p = load_info_plist(dest)
-    p["CFBundleName"] = unicode(shortname)
-    p["CFBundleDisplayName"] = unicode(name)
-    save_info_plist(dest, p)
 
     interface.success("Created the Xcode project.")
