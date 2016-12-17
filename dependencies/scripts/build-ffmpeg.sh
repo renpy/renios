@@ -99,6 +99,7 @@ try ./configure --prefix=$DESTROOT \
     --disable-vdpau \
     --disable-videotoolbox \
     --disable-iconv \
+    --disable-sse --disable-sse2 --disable-sse3 --disable-ssse3 --disable-sse4 --disable-sse42 \
     --enable-pic
 
 
