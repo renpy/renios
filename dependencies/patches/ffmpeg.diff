@@ -1,0 +1,21 @@
+diff -u -r ffmpeg-3.0.5.clean/libavutil/time.c ffmpeg-3.0.5/libavutil/time.c
+--- ffmpeg-3.0.5.clean/libavutil/time.c	2016-03-28 22:25:32.000000000 -0400
++++ ffmpeg-3.0.5/libavutil/time.c	2016-12-15 23:18:25.735109495 -0500
+@@ -55,7 +55,7 @@
+ 
+ int64_t av_gettime_relative(void)
+ {
+-#if HAVE_CLOCK_GETTIME && defined(CLOCK_MONOTONIC)
++#if 0 && HAVE_CLOCK_GETTIME && defined(CLOCK_MONOTONIC)
+     struct timespec ts;
+     clock_gettime(CLOCK_MONOTONIC, &ts);
+     return (int64_t)ts.tv_sec * 1000000 + ts.tv_nsec / 1000;
+@@ -66,7 +66,7 @@
+ 
+ int av_gettime_relative_is_monotonic(void)
+ {
+-#if HAVE_CLOCK_GETTIME && defined(CLOCK_MONOTONIC)
++#if 0 && HAVE_CLOCK_GETTIME && defined(CLOCK_MONOTONIC)
+     return 1;
+ #else
+     return 0;

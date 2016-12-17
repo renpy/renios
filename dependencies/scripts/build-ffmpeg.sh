@@ -10,12 +10,14 @@ if [ ! -f $CACHEROOT/ffmpeg-$FFMPEG_VERSION.tar.gz ]; then
 fi
 
 if [ ! -d $TMPROOT/ffmpeg-$FFMPEG_VERSION ]; then
-  try rm -rf $TMPROOT/ffmpeg-$FFMPEG_VERSION
-  try tar xf $CACHEROOT/ffmpeg-$FFMPEG_VERSION.tar.gz # 2>&1 >/dev/null
-  mv ffmpeg-$FFMPEG_VERSION $TMPROOT
-#   pushd $TMPROOT/libav-$LIBAV_VERSION
-#     try patch -p0 < $RENIOSDEPROOT/patches/libav.diff
-#   popd
+    try rm -rf $TMPROOT/ffmpeg-$FFMPEG_VERSION
+    try tar xf $CACHEROOT/ffmpeg-$FFMPEG_VERSION.tar.gz
+    mv ffmpeg-$FFMPEG_VERSION $TMPROOT
+
+    pushd $TMPROOT/ffmpeg-$FFMPEG_VERSION
+    try patch -p1 < $RENIOSDEPROOT/patches/ffmpeg.diff
+    popd
+
 fi
 
 export PATH="$(dirname $0):$PATH"
