@@ -1,6 +1,5 @@
 # Find iOS SDK paths
 
-export XCODEPATH=`xcode-select -print-path`
 export SDKVER=`xcodebuild -showsdks | fgrep "iphoneos" | tail -n 1 | awk '{print $2}'`
 export DEVROOT=$XCODEPATH/Platforms/iPhoneOS.platform/Developer
 export IOSSDKROOT=$DEVROOT/SDKs/iPhoneOS$SDKVER.sdk

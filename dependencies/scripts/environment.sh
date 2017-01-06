@@ -34,3 +34,12 @@ export LIBJPEG_TURBO_VERSION=1.4.1
 export FFI_VERSION=3.2.1
 export FFMPEG_VERSION=3.0
 export LIBWEBP_VERSION=0.5.1
+
+if [ -z "$XCODEAPP" ]; then
+    echo "Please set XCODEAPP to the path to the version of xcode to use to build"
+    echo "the renios dependencies."
+    exit 1
+fi
+
+export XCODEPATH="$XCODEAPP/Contents/Developer"
+export PATH="$XCODEPATH/usr/bin:$PATH"
