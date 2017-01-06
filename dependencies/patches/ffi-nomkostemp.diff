@@ -1,0 +1,10 @@
+--- libffi-3.2.1/configure.old	2017-01-06 00:02:45.000000000 -0500
++++ libffi-3.2.1/configure	2017-01-06 00:02:15.000000000 -0500
+@@ -16912,6 +16912,7 @@
+ do :
+   as_ac_var=`$as_echo "ac_cv_func_$ac_func" | $as_tr_sh`
+ ac_fn_c_check_func "$LINENO" "$ac_func" "$as_ac_var"
++ac_cv_func_mkostemp=no
+ if eval test \"x\$"$as_ac_var"\" = x"yes"; then :
+   cat >>confdefs.h <<_ACEOF
+ #define `$as_echo "HAVE_$ac_func" | $as_tr_cpp` 1

@@ -4,7 +4,10 @@ echo "Building libffi ============================="
 
 . $(dirname $0)/utils.sh
 
-set -x
+
+export SDKROOT="$IOSSDKROOT"
+export LDFLAGS="$ARM_LDFLAGS" CFLAGS="$ARM_CFLAGS"
+
 
 if [ ! -f $CACHEROOT/libffi-$FFI_VERSION.tar.gz ]; then
     try curl -L ftp://sourceware.org/pub/libffi/libffi-$FFI_VERSION.tar.gz > $CACHEROOT/libffi-$FFI_VERSION.tar.gz
@@ -15,6 +18,7 @@ if [ ! -d $TMPROOT/libffi-$FFI_VERSION ]; then
 
     pushd $TMPROOT/libffi-$FFI_VERSION
     try patch -p1 < $RENIOSDEPROOT/patches/ffi-i386-darwin.diff
+    try patch -p1 < $RENIOSDEPROOT/patches/ffi-nomkostemp.diff
     popd
 fi
 
@@ -24,9 +28,11 @@ pushd $TMPROOT/libffi-$FFI_VERSION
 
 # libffi needs to use "-miphoneos-version-min=6.0" for xcode 6+ to compile it correctly
 sed -i.bak s/-miphoneos-version-min=5.1.1/-miphoneos-version-min=6.0/g generate-darwin-source-and-headers.py
+try xcodebuild -project libffi.xcodeproj -target "libffi-iOS" -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKROOT -arch $RENIOSARCH clean
+try xcodebuild -project libffi.xcodeproj -target "libffi-iOS" -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKROOT -arch $RENIOSARCH
 
-try xcodebuild -project libffi.xcodeproj -target "libffi-iOS" -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH clean
-try xcodebuild -project libffi.xcodeproj -target "libffi-iOS" -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH
+# try xcodebuild -project libffi.xcodeproj -target "libffi-iOS" -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH clean
+# try xcodebuild -project libffi.xcodeproj -target "libffi-iOS" -configuration $RENIOSBUILDCONFIGURATION -sdk $SDKBASENAME$SDKVER -arch $RENIOSARCH
 
 
 BC=$RENIOSBUILDCONFIGURATION-$SDKBASENAME

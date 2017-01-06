@@ -41,5 +41,9 @@ if [ -z "$XCODEAPP" ]; then
     exit 1
 fi
 
+XCODEAPP=${XCODEAPP%/}
+
 export XCODEPATH="$XCODEAPP/Contents/Developer"
+export DEVELOPER_DIR="$XCODEAPP/Contents/Developer"
+
 export PATH="$XCODEPATH/usr/bin:$PATH"
