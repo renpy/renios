@@ -10,6 +10,24 @@ export CACHEROOT="$RENIOSDEPROOT/cache"
 # Set up path to include our gas-preprocessor.pl
 export PATH="$RENIOSDEPROOT/scripts:/usr/local/bin:$PATH"
 
+
+if [ -z "$XCODEAPP" ]; then
+    echo "Please set XCODEAPP to the path to the version of xcode to use to build"
+    echo "the renios dependencies."
+    exit 1
+fi
+
+export XCODEAPP=${XCODEAPP%/}
+export XCODEPATH="$XCODEAPP/Contents/Developer"
+export DEVELOPER_DIR="$XCODEAPP/Contents/Developer"
+
+# Find nasm, and put it before
+
+export PATH="$(dirname $(which nasm)):$XCODEPATH/usr/bin:$PATH"
+
+
+
+
 # create build directories if not found
 try mkdir -p $CACHEROOT
 try mkdir -p $TMPROOT
@@ -34,16 +52,3 @@ export LIBJPEG_TURBO_VERSION=1.4.1
 export FFI_VERSION=3.2.1
 export FFMPEG_VERSION=3.0
 export LIBWEBP_VERSION=0.5.1
-
-if [ -z "$XCODEAPP" ]; then
-    echo "Please set XCODEAPP to the path to the version of xcode to use to build"
-    echo "the renios dependencies."
-    exit 1
-fi
-
-XCODEAPP=${XCODEAPP%/}
-
-export XCODEPATH="$XCODEAPP/Contents/Developer"
-export DEVELOPER_DIR="$XCODEAPP/Contents/Developer"
-
-export PATH="$XCODEPATH/usr/bin:$PATH"
