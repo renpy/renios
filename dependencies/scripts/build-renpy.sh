@@ -56,6 +56,7 @@ try $RENIOSDEPROOT/scripts/biglink $BUILDROOT/lib/librenpy.a $(find build/lib.$P
 rm -Rf "$BUILDROOT/python/lib/python2.7/site-packages/renpy"
 try cp -R "$DESTROOT/usr/local/lib/python2.7/site-packages/renpy" "$BUILDROOT/python/lib/python2.7/site-packages"
 try cp -R "$DESTROOT/usr/local/lib/python2.7/site-packages/_renpy.so" "$BUILDROOT/python/lib/python2.7/site-packages"
+try cp -R "$DESTROOT/usr/local/lib/python2.7/site-packages/_renpybidi.so" "$BUILDROOT/python/lib/python2.7/site-packages"
 
 export CC="$OLD_CC"
 export CFLAGS="$OLD_CFLAGS"
