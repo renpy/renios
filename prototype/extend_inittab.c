@@ -24,6 +24,7 @@ PyMODINIT_FUNC initerror(void);
 PyMODINIT_FUNC initpygame_time(void);
 PyMODINIT_FUNC initrender(void);
 PyMODINIT_FUNC initevent(void);
+PyMODINIT_FUNC initparsersupport(void);
 PyMODINIT_FUNC initstyle(void);
 PyMODINIT_FUNC initgldraw(void);
 PyMODINIT_FUNC initglenviron_shader(void);
@@ -74,6 +75,7 @@ void renios_extend_inittab(void) {
     PyImport_AppendInittab("pygame_sdl2.pygame_time", initpygame_time);
     PyImport_AppendInittab("pygame_sdl2.render", initrender);
     PyImport_AppendInittab("pygame_sdl2.event", initevent);
+    PyImport_AppendInittab("renpy.parsersupport", initparsersupport);
     PyImport_AppendInittab("renpy.style", initstyle);
     PyImport_AppendInittab("renpy.gl.gldraw", initgldraw);
     PyImport_AppendInittab("renpy.gl.glenviron_shader", initglenviron_shader);
