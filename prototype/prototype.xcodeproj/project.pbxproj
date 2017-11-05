@@ -336,6 +336,8 @@
 					"-lpyobjus",
 					"-lpython2.7",
 					"-lffi",
+                                        "-lssl",
+                                        "-lcrypto",
 				);
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.renpy.prototype;
@@ -382,6 +384,8 @@
 					"-lpyobjus",
 					"-lpython2.7",
 					"-lffi",
+                                        "-lssl",
+                                        "-lcrypto",
 				);
 				PRESERVE_DEAD_CODE_INITS_AND_TERMS = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = org.renpy.prototype;
