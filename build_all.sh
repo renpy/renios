@@ -23,6 +23,7 @@ build_once() {
 root=$(dirname $0)
 pushd $root/dependencies
 
+build_once openssl
 build_once libffi
 build_once python
 build_once sdl
