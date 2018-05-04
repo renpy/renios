@@ -4,9 +4,9 @@
 
 if [ ! -f $CACHEROOT/libpng-$LIBPNG_VERSION.tar.gz ]; then
   echo 'Downloading libpng source'
-  echo http://downloads.sourceforge.net/project/libpng/libpng16/$LIBPNG_VERSION/libpng-$LIBPNG_VERSION.tar.gz
+  echo $LIBPNG_URL_PREFIX/$LIBPNG_VERSION/libpng-$LIBPNG_VERSION.tar.gz
 
-  try curl -L http://downloads.sourceforge.net/project/libpng/libpng16/$LIBPNG_VERSION/libpng-$LIBPNG_VERSION.tar.gz > $CACHEROOT/libpng-$LIBPNG_VERSION.tar.gz
+  try curl -L $LIBPNG_URL_PREFIX/$LIBPNG_VERSION/libpng-$LIBPNG_VERSION.tar.gz > $CACHEROOT/libpng-$LIBPNG_VERSION.tar.gz
 fi
 
 try rm -rf $TMPROOT/libpng-$LIBPNG_VERSION
