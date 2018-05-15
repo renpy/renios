@@ -38,14 +38,15 @@ export PYTHON_VERSION=2.7.3
 # export RENPY_VERSION=6.14.1
 # export PYGAME_VERSION=1.9.1
 export FREETYPE_VERSION=2.4.12
-export FRIBIDI_VERSION=0.19.2
-
 
 export SDL_VERSION=2.0.4
 export SDL_URL_PREFIX=https://www.libsdl.org/release
 
 export LIBPNG_VERSION=1.6.18
 export LIBPNG_URL_PREFIX=http://downloads.sourceforge.net/project/libpng/libpng16/older-releases
+
+export FRIBIDI_URL_PREFIX=https://github.com/renpy/renpy-deps/blob/master/source
+export FRIBIDI_VERSION=0.19.2
 
 export SDL2_GFX_VERSION=1.0.1
 export SDL2_TTF_VERSION=2.0.12

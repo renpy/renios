@@ -4,7 +4,7 @@
 
 if [ ! -f $CACHEROOT/fribidi-$FRIBIDI_VERSION.tar.gz ]; then
   echo "Downloading fribidi source"
-  try curl -L http://www.fribidi.org/download/fribidi-$FRIBIDI_VERSION.tar.gz > $CACHEROOT/fribidi-$FRIBIDI_VERSION.tar.gz
+  try curl -L $FRIBIDI_URL_PREFIX/fribidi-$FRIBIDI_VERSION.tar.gz?raw=true > $CACHEROOT/fribidi-$FRIBIDI_VERSION.tar.gz
 fi
 if [ ! -d $TMPROOT/fribidi-$FRIBIDI_VERSION ]; then
   try rm -rf $TMPROOT/fribidi-$FRIBIDI_VERSION
