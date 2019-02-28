@@ -22,14 +22,14 @@ export LDSHARED="$RENIOSDEPROOT/scripts/liblink"
 
 HOSTPYTHON="$RENIOSDEPROOT/tmp/Python-$PYTHON_VERSION/hostpython"
 
-echo 'Configuring renpy source'
+echo 'Configuring renpy source' $PYARCH
 export RENPY_IOS=1
 export RENPY_CYTHON=cython
 
 
 echo 'Building renpy'
 
-if [ -z "NOCLEAN" ]; then
+if [ -z "$NOCLEAN" ]; then
 	rm -Rf build/lib.$PYARCH
 	rm -Rf build/tmp.$PYARCH
 fi
