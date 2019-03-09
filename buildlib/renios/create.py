@@ -32,13 +32,18 @@ def replace_name(o, template, replacement, path=()):
         raise Exception("Unknown Xcode entry %r at %r." % (o, path))
 
 
-def create_project(interface, dest):
+def create_project(interface, dest, name=None, version="1.0"):
     """
     Copies the prototype project to `dest`, which must not already exists. Renames the
     Xcode project to `name`.xcodeproj.
     """
 
-    name = os.path.basename(dest)
+    if name is None:
+        name = os.path.basename(dest)
+
+    if version is None:
+        return
+
     shortname = re.sub(r'[^-_A-Za-z0-9]', '', name)
 
     if os.path.exists(dest):
@@ -73,7 +78,7 @@ def create_project(interface, dest):
         root, _parseinfo = xcodeprojer.parse(f.read())
 
     root = replace_name(root, "XHTE5H7Z79", "TEAMID")
-    root = replace_name(root, "org.renpy", "com.domain")
+    root = replace_name(root, "org.renpy.prototype", "com.domain." + shortname)
     root = replace_name(root, "prototype", name)
 
     output = xcodeprojer.unparse(root, format="xcode", projectname=name)
@@ -87,5 +92,27 @@ def create_project(interface, dest):
         pass
 
     os.rename(pbxproj + ".new", pbxproj)
+
+    plist = dict(
+        CFBundleDevelopmentRegion="en",
+        CFBundleDisplayName="$(PRODUCT_NAME)",
+        CFBundleExecutable="$(EXECUTABLE_NAME)",
+        CFBundleIdentifier="$(PRODUCT_BUNDLE_IDENTIFIER)",
+        CFBundleInfoDictionaryVersion="6.0",
+        CFBundleName="$(PRODUCT_NAME)",
+        CFBundlePackageType="APPL",
+        CFBundleShortVersionString=version,
+        CFBundleSignature="????",
+        CFBundleVersion=1,
+        LSRequiresIPhoneOS=True,
+        UIRequiresFullScreen=True,
+        UIStatusBarHidden=True,
+        UISupportedInterfaceOrientations=[
+            "UIInterfaceOrientationLandscapeRight",
+            "UIInterfaceOrientationLandscapeLeft",
+            ]
+        )
+
+    plistlib.writePlist(plist, os.path.join(dest, "Info.plist"))
 
     interface.success("Created the Xcode project.")
