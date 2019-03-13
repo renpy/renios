@@ -33,6 +33,9 @@ def generate(source, destination, scale):
 
     for i in contents["images"]:
 
+        if "filename" not in i:
+            continue
+
         dfn = os.path.join(destination, i['filename'])
 
         dst = pygame_sdl2.image.load(dfn)
