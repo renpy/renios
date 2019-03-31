@@ -1,0 +1,19 @@
+diff -r -u Python-2.7.3/Modules/posixmodule.c Python-2.7.3-new/Modules/posixmodule.c
+--- Python-2.7.3/Modules/posixmodule.c	2012-04-09 19:07:34.000000000 -0400
++++ Python-2.7.3-new/Modules/posixmodule.c	2019-03-30 22:31:59.501748047 -0400
+@@ -2657,7 +2657,8 @@
+     if (!PyArg_ParseTuple(args, "s:system", &command))
+         return NULL;
+     Py_BEGIN_ALLOW_THREADS
+-    sts = system(command);
++    // sts = system(command);
++    sts = -1;
+     Py_END_ALLOW_THREADS
+     return PyInt_FromLong(sts);
+ }
+@@ -9367,5 +9368,3 @@
+ #ifdef __cplusplus
+ }
+ #endif
+-
+-

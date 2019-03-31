@@ -49,6 +49,7 @@ try make distclean 2>&1 >/dev/null
 
 echo 'Building for iOS'
 try patch -p1 < $RENIOSDEPROOT/patches/python/Python-$PYTHON_VERSION-xcompile.patch
+try patch -p1 < $RENIOSDEPROOT/patches/python/Python-$PYTHON_VERSION-system.patch
 export CPP="$CCACHE /usr/bin/cpp $CPPFLAGS"
 export MACOSX_DEPLOYMENT_TARGET=
 
