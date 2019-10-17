@@ -34,6 +34,7 @@ PyMODINIT_FUNC initgl(void);
 PyMODINIT_FUNC initglrtt_fbo(void);
 PyMODINIT_FUNC initgltexture(void);
 PyMODINIT_FUNC initglrtt_copy(void);
+PyMODINIT_FUNC initmatrix(void);
 PyMODINIT_FUNC initaccelerator(void);
 PyMODINIT_FUNC initrender(void);
 PyMODINIT_FUNC initstylesets(void);
@@ -51,6 +52,16 @@ PyMODINIT_FUNC initstyle_selected_activate_functions(void);
 PyMODINIT_FUNC initftfont(void);
 PyMODINIT_FUNC inittexwrap(void);
 PyMODINIT_FUNC inittextsupport(void);
+PyMODINIT_FUNC initgldraw(void);
+PyMODINIT_FUNC initglenviron_shader(void);
+PyMODINIT_FUNC initgl2draw(void);
+PyMODINIT_FUNC initglrtt_fbo(void);
+PyMODINIT_FUNC initgltexture(void);
+PyMODINIT_FUNC inituguugl(void);
+PyMODINIT_FUNC initgl2shader(void);
+PyMODINIT_FUNC inituguu(void);
+PyMODINIT_FUNC initgl2geometry(void);
+PyMODINIT_FUNC initgl2texture(void);
 PyMODINIT_FUNC initrenpysound(void);
 
 void renios_extend_inittab(void) {
@@ -87,6 +98,7 @@ void renios_extend_inittab(void) {
     PyImport_AppendInittab("renpy.gl.glrtt_fbo", initglrtt_fbo);
     PyImport_AppendInittab("renpy.gl.gltexture", initgltexture);
     PyImport_AppendInittab("renpy.gl.glrtt_copy", initglrtt_copy);
+    PyImport_AppendInittab("renpy.display.matrix", initmatrix);
     PyImport_AppendInittab("renpy.display.accelerator", initaccelerator);
     PyImport_AppendInittab("renpy.display.render", initrender);
     PyImport_AppendInittab("renpy.styledata.stylesets", initstylesets);
@@ -104,5 +116,15 @@ void renios_extend_inittab(void) {
     PyImport_AppendInittab("renpy.text.ftfont", initftfont);
     PyImport_AppendInittab("renpy.text.texwrap", inittexwrap);
     PyImport_AppendInittab("renpy.text.textsupport", inittextsupport);
+    PyImport_AppendInittab("renpy.gl2.gldraw", initgldraw);
+    PyImport_AppendInittab("renpy.gl2.glenviron_shader", initglenviron_shader);
+    PyImport_AppendInittab("renpy.gl2.gl2draw", initgl2draw);
+    PyImport_AppendInittab("renpy.gl2.glrtt_fbo", initglrtt_fbo);
+    PyImport_AppendInittab("renpy.gl2.gltexture", initgltexture);
+    PyImport_AppendInittab("renpy.gl2.uguugl", inituguugl);
+    PyImport_AppendInittab("renpy.gl2.gl2shader", initgl2shader);
+    PyImport_AppendInittab("renpy.gl2.uguu", inituguu);
+    PyImport_AppendInittab("renpy.gl2.gl2geometry", initgl2geometry);
+    PyImport_AppendInittab("renpy.gl2.gl2texture", initgl2texture);
     PyImport_AppendInittab("renpy.audio.renpysound", initrenpysound);
 }
